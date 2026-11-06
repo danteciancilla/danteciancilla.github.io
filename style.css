@@ -794,7 +794,6 @@ button {
 
 /* Paragraphes que Dante ajoutera dans profile.text */
 .profile__text p + p,
-.contact__text p + p,
 .project__desc p + p,
 .detail-section__text p + p {
   margin-top: 1em;
@@ -1564,11 +1563,6 @@ button {
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: clamp(28px, 5vw, 56px);
   align-items: start;
-}
-
-.contact__text {
-  margin-bottom: 24px;
-  font-size: 1.05rem;
 }
 
 .contact-list {

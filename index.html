@@ -59,7 +59,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
-  <link rel="stylesheet" href="style.css?v=202611061953">
+  <link rel="stylesheet" href="style.css?v=202611062009">
 
   <!--
     Petit script exécuté AVANT l'affichage de la page :
@@ -95,10 +95,10 @@
   <!-- "defer" : les scripts s'exécutent une fois toute la page lue.
        "?v=…" : numéro de version, changé à chaque publication par publier.bat,
        pour que le navigateur recharge les fichiers au lieu de garder l'ancienne copie. -->
-  <script src="textes.js?v=202611061953" defer></script>
-  <script src="competences-bloc1.js?v=202611061953" defer></script>
-  <script src="realisations.js?v=202611061953" defer></script>
-  <script src="script.js?v=202611061953" defer></script>
+  <script src="textes.js?v=202611062009" defer></script>
+  <script src="competences-bloc1.js?v=202611062009" defer></script>
+  <script src="realisations.js?v=202611062009" defer></script>
+  <script src="script.js?v=202611062009" defer></script>
 
   <!-- Informations structurées pour Google (fiche « personne ») -->
   <script type="application/ld+json">
@@ -174,7 +174,7 @@
   <!-- ============================ EN-TÊTE ============================ -->
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="#accueil" data-texte-attr="aria-label:logo.label" aria-label="Dante Ciancilla – retour à l'accueil">
+      <a class="logo" href="#accueil" data-texte-attr="aria-label:logo.label" aria-label="Dante Ciancilla – retour à l’accueil">
         <span class="logo__mark" aria-hidden="true">DC</span>
         <span class="logo__text">Dante Ciancilla</span>
       </a>
@@ -219,7 +219,7 @@
           <!-- style="--i:…" = ordre d'apparition de l'élément au chargement -->
           <div class="hero__content">
             <h1 class="hero__title hero-anim" style="--i:1" id="hero-title">Dante Ciancilla</h1>
-            <p class="hero__role hero-anim" style="--i:2" data-texte="hero.role">Étudiant en informatique, développement d'applications</p>
+            <p class="hero__role hero-anim" style="--i:2" data-texte="hero.role">Étudiant en informatique, développement d’applications</p>
             <p class="hero__sub hero-anim" style="--i:3" data-texte="hero.sub">1re année BTS SIO option SLAM · CNED</p>
 
             <!-- Phrase d'accroche : à écrire dans textes.js (clé hero.tagline) -->
@@ -386,7 +386,7 @@
                 </div>
                 <div class="facts__row">
                   <dt data-texte="intern.field">Domaine</dt>
-                  <dd data-texte="intern.fieldValue">Développement d'applications (option SLAM)</dd>
+                  <dd data-texte="intern.fieldValue">Développement d’applications (option SLAM)</dd>
                 </div>
                 <div class="facts__row">
                   <dt data-texte="intern.place">Lieu</dt>
@@ -438,19 +438,6 @@
           <div class="timeline__track" aria-hidden="true"><span class="timeline__fill"></span></div>
 
           <ol class="timeline__list">
-            <!-- Stage de 1re année -->
-            <li class="timeline__item reveal">
-              <p class="timeline__date"><time datetime="2027-05" data-texte="journey.intern.date">Entre mai et août 2027</time></p>
-              <span class="timeline__dot" aria-hidden="true"><svg class="icon"><use href="#i-briefcase"></use></svg></span>
-              <div class="timeline__card">
-                <div class="timeline__top">
-                  <h3 class="timeline__title" data-texte="journey.intern.title">Stage de 1re année</h3>
-                  <span class="status status--upcoming" data-texte="status.upcoming">À venir</span>
-                </div>
-                <p class="timeline__sub" data-texte="journey.intern.sub">4 à 5 semaines · Développement d'applications</p>
-              </div>
-            </li>
-
             <!-- BTS SIO option SLAM -->
             <li class="timeline__item reveal">
               <p class="timeline__date"><time datetime="2026-10" data-texte="journey.bts.date">Depuis oct. 2026 (2026 – 2028)</time></p>
@@ -508,7 +495,7 @@
         <div class="skills-legend reveal">
           <span data-texte="skills.legend">Niveaux :</span>
           <span class="level level--used" data-texte="level.used">Utilisé en projet</span>
-          <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+          <span class="level level--learning" data-texte="level.learning">En cours d’acquisition</span>
         </div>
 
         <!--
@@ -525,7 +512,7 @@
             </div>
 
             <button class="cv-preview" type="button" data-open-dialog="cv-dialog"
-                    aria-label="Agrandir l'aperçu du CV" data-texte-attr="aria-label:cv.zoomLabel">
+                    aria-label="Agrandir l’aperçu du CV" data-texte-attr="aria-label:cv.zoomLabel">
               <img class="cv-img" src="images/cv-apercu.jpg" data-fallback="images/cv-placeholder.svg"
                    alt="" width="595" height="842" loading="lazy">
               <span class="cv-preview__zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"></use></svg></span>
@@ -558,7 +545,7 @@
                 <h3 class="skill-card__title" data-texte="cat.languages">Langages</h3>
               </div>
               <div class="skill-row">
-                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <span class="level level--learning" data-texte="level.learning">En cours d’acquisition</span>
                 <ul class="chips">
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/csharp/csharp-original.svg" alt="Logo C#" width="22" height="22" loading="lazy">C#</li>
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/python/python-original.svg" alt="Logo Python" width="22" height="22" loading="lazy">Python</li>
@@ -575,7 +562,7 @@
                 <h3 class="skill-card__title" data-texte="cat.db">Bases de données</h3>
               </div>
               <div class="skill-row">
-                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <span class="level level--learning" data-texte="level.learning">En cours d’acquisition</span>
                 <ul class="chips">
                   <li class="chip chip--logo"><span class="chip__logo" role="img" aria-label="Icône SQL"><svg class="icon"><use href="#i-database"></use></svg></span>SQL</li>
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/postgresql/postgresql-original.svg" alt="Logo PostgreSQL" width="22" height="22" loading="lazy">PostgreSQL</li>
@@ -592,7 +579,7 @@
                 <h3 class="skill-card__title" data-texte="cat.web">Web</h3>
               </div>
               <div class="skill-row">
-                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <span class="level level--learning" data-texte="level.learning">En cours d’acquisition</span>
                 <ul class="chips">
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/html5/html5-original.svg" alt="Logo HTML" width="22" height="22" loading="lazy">HTML</li>
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/css3/css3-original.svg" alt="Logo CSS" width="22" height="22" loading="lazy">CSS</li>
@@ -619,7 +606,7 @@
                 </ul>
               </div>
               <div class="skill-row">
-                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <span class="level level--learning" data-texte="level.learning">En cours d’acquisition</span>
                 <ul class="chips">
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/git/git-original.svg" alt="Logo Git" width="22" height="22" loading="lazy">Git</li>
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/visualstudio/visualstudio-original.svg" alt="Logo Visual Studio" width="22" height="22" loading="lazy">Visual Studio</li>
@@ -636,7 +623,7 @@
                 <h3 class="skill-card__title" data-texte="cat.systems">Systèmes et réseaux</h3>
               </div>
               <div class="skill-row">
-                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <span class="level level--learning" data-texte="level.learning">En cours d’acquisition</span>
                 <ul class="chips chips--auto">
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/windows11/windows11-original.svg" alt="Logo Windows" width="22" height="22" loading="lazy">Windows</li>
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/ubuntu/ubuntu-original.svg" alt="Logo Linux (Ubuntu)" width="22" height="22" loading="lazy">Linux (Ubuntu)</li>
@@ -644,7 +631,7 @@
                 </ul>
               </div>
               <ul class="check-list check-list--spaced">
-                <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span data-texte="skill.pc">Montage d'un PC</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span data-texte="skill.pc">Montage d’un PC</span></li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span data-texte="skill.windows">Installation de Windows</span></li>
               </ul>
             </article>
@@ -687,9 +674,6 @@
 
         <div class="contact">
           <div class="contact__info">
-            <!-- Petit texte d'invitation : à écrire dans textes.js (clé contact.text) -->
-            <div class="contact__text reveal" data-texte-html="contact.text"></div>
-
             <ul class="contact-list">
               <li class="contact-item reveal">
                 <span class="contact-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-mail"></use></svg></span>
@@ -872,7 +856,7 @@
         </div>
         <div class="facts__row">
           <dt data-texte="bts.otherLabel">Autre option</dt>
-          <dd data-texte="bts.other">SISR – Solutions d'Infrastructure, Systèmes et Réseaux</dd>
+          <dd data-texte="bts.other">SISR – Solutions d’Infrastructure, Systèmes et Réseaux</dd>
         </div>
         <div class="facts__row">
           <dt data-texte="bts.durationLabel">Durée</dt>

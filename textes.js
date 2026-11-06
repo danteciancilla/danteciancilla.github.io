@@ -30,7 +30,7 @@ const TEXTES = {
 
   // --- Accessibilité et en-tête ---
   "skip": "Aller au contenu",
-  "logo.label": "Dante Ciancilla – retour à l'accueil",
+  "logo.label": "Dante Ciancilla – retour à l’accueil",
   "nav.label": "Navigation principale",
   "nav.home": "Accueil",
   "nav.profile": "Profil",
@@ -44,10 +44,10 @@ const TEXTES = {
   "theme.toLight": "Activer le mode clair",
 
   // --- 1. Accueil ---
-  "hero.role": "Étudiant en informatique, développement d'applications",
+  "hero.role": "Étudiant en informatique, développement d’applications",
   "hero.sub": "1re année BTS SIO option SLAM · CNED",
   // Texte écrit par Dante
-  "hero.tagline": "Passionné par le développement, j'apprends à créer des applications, des sites web et des jeux.",
+  "hero.tagline": "J’apprends à créer des applications, des sites web et des jeux.",
   "hero.ctaProjects": "Voir mes projets",
   "hero.ctaCv": "Télécharger mon CV",
   "hero.ctaContact": "Me contacter",
@@ -69,7 +69,7 @@ const TEXTES = {
   // --- 2. Profil ---
   "profile.title": "Profil",
   // Ma présentation LinkedIn (écrite par moi), mise en forme avec du gras
-  "profile.text": "<p>Étudiant en 1re année de <strong>BTS SIO option SLAM</strong> au CNED, je recherche un <strong>stage de 4 à 5 semaines</strong> en développement entre mai et août 2027, à Sète ou à Montpellier.</p><p>Venu au code par le jeu vidéo, j'ai co-créé un <strong>jeu Roblox</strong> qui approche les 2 000 visites, et réalisé le <strong>site professionnel d'une coiffeuse à domicile</strong>.</p><p>Scolarisé à distance depuis la 4e, je suis <strong>autonome</strong>, à l'aise en anglais (C1) et j'apprécie les retours francs.</p>",
+  "profile.text": "<p>Étudiant en 1re année de <strong>BTS SIO option SLAM</strong> au CNED, je recherche un <strong>stage de 4 à 5 semaines</strong> en développement entre mai et août 2027, à Sète ou à Montpellier.</p><p>Venu au code par le jeu vidéo, j’ai co-créé un <strong>jeu Roblox</strong> qui approche les 2 000 visites, et réalisé le <strong>site professionnel d’une coiffeuse à domicile</strong>.</p><p>Scolarisé à distance depuis la 4e, je suis <strong>autonome</strong>, à l’aise en anglais (C1) et j’apprécie les retours francs.</p>",
   "training.title": "Formation actuelle",
   "training.name": "BTS SIO – Option SLAM",
   "training.school": "CNED · formation à distance",
@@ -80,7 +80,7 @@ const TEXTES = {
   "intern.period": "Période",
   "intern.periodValue": "Entre mai et août 2027",
   "intern.field": "Domaine",
-  "intern.fieldValue": "Développement d'applications (option SLAM)",
+  "intern.fieldValue": "Développement d’applications (option SLAM)",
   "intern.place": "Lieu",
   "intern.placeValue": "Sète ou Montpellier",
 
@@ -90,7 +90,7 @@ const TEXTES = {
   "bts.slamLabel": "Option SLAM",
   "bts.slam": "Solutions Logicielles et Applications Métiers",
   "bts.otherLabel": "Autre option",
-  "bts.other": "SISR – Solutions d'Infrastructure, Systèmes et Réseaux",
+  "bts.other": "SISR – Solutions d’Infrastructure, Systèmes et Réseaux",
   "bts.durationLabel": "Durée",
   "bts.duration": "2 ans (2026 – 2028)",
   "bts.schoolLabel": "Établissement",
@@ -115,7 +115,7 @@ const TEXTES = {
   "group.bloc1.title": "Projets scolaires – Bloc 1",
   "group.bloc1.sub": "Support et mise à disposition de services informatiques",
   "group.bloc2.title": "Projets scolaires – Bloc 2 (option SLAM)",
-  "group.bloc2.sub": "Conception et développement d'applications",
+  "group.bloc2.sub": "Conception et développement d’applications",
   // Statuts
   "status.done": "Réalisé",
   "status.progress": "En cours",
@@ -146,37 +146,34 @@ const TEXTES = {
   "detail.steps": "Déroulement du projet",
   "detail.video": "Documentation utilisateur (vidéo)",
   "detail.videoPlaceholder": "Vidéo à venir",
-  "detail.gallery": "Captures d'écran",
+  "detail.gallery": "Captures d’écran",
   "detail.galleryPlaceholder": "Capture à venir",
   "detail.enlarge": "Agrandir la capture",
   "detail.links": "Liens",
-  "detail.noLinks": "Aucun lien pour l'instant.",
+  "detail.noLinks": "Aucun lien pour l’instant.",
   "detail.skills": "Compétences du bloc 1 couvertes",
-  "detail.noSkills": "Aucune compétence du bloc 1 renseignée pour l'instant.",
+  "detail.noSkills": "Aucune compétence du bloc 1 renseignée pour l’instant.",
 
   // --- 4. Parcours ---
   "journey.title": "Parcours",
   "journey.sub": "Du plus récent au plus ancien",
-  "journey.intern.date": "Entre mai et août 2027",
-  "journey.intern.title": "Stage de 1re année",
-  "journey.intern.sub": "4 à 5 semaines · Développement d'applications",
   "journey.bts.date": "Depuis oct. 2026 (2026 – 2028)",
   "journey.bts.title": "BTS SIO option SLAM",
   "journey.bts.full": "Brevet de Technicien Supérieur Services Informatiques aux Organisations, option Solutions Logicielles et Applications Métiers",
   "journey.bts.place": "CNED – formation à distance",
-  "journey.bts.text": "[À RÉDIGER PAR DANTE – FR] Présentation du BTS SIO et de l'option SLAM (ce que l'on y apprend, les métiers visés)",
+  "journey.bts.text": "[À RÉDIGER PAR DANTE – FR] Présentation du BTS SIO et de l’option SLAM (ce que l’on y apprend, les métiers visés)",
   "journey.bac.date": "2026",
   "journey.bac.title": "Baccalauréat général",
   "journey.bac.full": "Spécialités Mathématiques et Physique-Chimie",
   "journey.bac.place": "CNED – formation à distance",
-  "journey.bac.mention": "[À VÉRIFIER PAR DANTE] Mention éventuelle (à indiquer, ou à supprimer s'il n'y en a pas)",
+  "journey.bac.mention": "[À VÉRIFIER PAR DANTE] Mention éventuelle (à indiquer, ou à supprimer s’il n’y en a pas)",
 
   // --- 5. Compétences ---
   "skills.title": "Compétences",
   "skills.legend": "Niveaux :",
   "skills.cv": "Télécharger mon CV",
   "level.used": "Utilisé en projet",
-  "level.learning": "En cours d'acquisition",
+  "level.learning": "En cours d’acquisition",
   "cat.languages": "Langages",
   "cat.web": "Web",
   "cat.db": "Bases de données",
@@ -184,7 +181,7 @@ const TEXTES = {
   "cat.systems": "Systèmes et réseaux",
   "cat.soft": "Savoir-être",
   "cat.langs": "Langues",
-  "skill.pc": "Montage d'un PC",
+  "skill.pc": "Montage d’un PC",
   "skill.windows": "Installation de Windows",
   "skill.autonomy": "Autonomie",
   "skill.team": "Travail en équipe",
@@ -195,20 +192,18 @@ const TEXTES = {
   // --- Bloc CV ---
   "cv.title": "Mon CV",
   "cv.zoom": "Agrandir",
-  "cv.zoomLabel": "Agrandir l'aperçu du CV",
+  "cv.zoomLabel": "Agrandir l’aperçu du CV",
   "cv.dialogTitle": "CV de Dante Ciancilla",
   "cv.download": "Télécharger (PDF)",
   "cv.alt": "CV de Dante Ciancilla",
 
   // --- 6. Contact ---
   "contact.title": "Contact",
-  // EXEMPLE IA – à réécrire
-  "contact.text": "Si vous avez une question, une proposition de <strong>stage</strong> ou un projet, n'hésitez pas à m'écrire, je vous répondrai avec plaisir.",
   "contact.emailLabel": "E-mail",
   "contact.copy": "Copier",
   "contact.copied": "Copié !",
   "contact.copiedMsg": "Adresse e-mail copiée",
-  "contact.copyError": "Copie impossible : sélectionnez l'adresse à la main",
+  "contact.copyError": "Copie impossible : sélectionnez l’adresse à la main",
   "contact.phoneLabel": "Téléphone",
   "contact.phone": "07 82 70 72 39",
   "contact.locationLabel": "Localisation",
@@ -226,11 +221,11 @@ const TEXTES = {
   "form.privacyLink": "En savoir plus",
   "form.errName": "Indiquez votre nom (2 caractères minimum).",
   "form.errEmail": "Indiquez une adresse e-mail valide (exemple : nom@domaine.fr).",
-  "form.errSubject": "Indiquez l'objet de votre message.",
+  "form.errSubject": "Indiquez l’objet de votre message.",
   "form.errMessage": "Écrivez votre message (10 caractères minimum).",
   "form.success": "Merci, votre message a bien été envoyé.",
-  "form.error": "L'envoi a échoué. Réessayez plus tard ou écrivez directement à danteciancilla@gmail.com.",
-  "form.notConfigured": "Le formulaire n'est pas encore activé. Écrivez directement à danteciancilla@gmail.com.",
+  "form.error": "L’envoi a échoué. Réessayez plus tard ou écrivez directement à danteciancilla@gmail.com.",
+  "form.notConfigured": "Le formulaire n’est pas encore activé. Écrivez directement à danteciancilla@gmail.com.",
 
   // --- Pied de page ---
   "footer.text": "Portfolio BTS SIO SLAM",
@@ -240,5 +235,5 @@ const TEXTES = {
   // --- Page « Mentions légales et confidentialité » ---
   "legal.metaTitle": "Mentions légales et confidentialité | Dante Ciancilla",
   "legal.title": "Mentions légales et confidentialité",
-  "legal.back": "Retour à l'accueil"
+  "legal.back": "Retour à l’accueil"
 };

@@ -70,10 +70,10 @@ const REALISATIONS = [
     date: "Oct. 2026 – en cours",
     chiffres: "~2 000 visites · 32 favoris · 20 joueurs simultanés",
     // EXEMPLE IA – à réécrire
-    description: "<strong>Jeu Roblox incrémental</strong> créé en binôme avec l'aide de l'IA, publié par notre groupe Lumel Studio.",
+    description: "<strong>Jeu Roblox incrémental</strong> créé en binôme avec l’aide de l’IA, publié par notre groupe Lumel Studio.",
     technologies: ["Roblox Studio", "Luau", "GitHub", "Discord"],
     miniature: "images/dig-incremental/miniature.jpg",
-    miniatureAlt: "Capture d'écran du jeu Dig Incremental",
+    miniatureAlt: "Capture d’écran du jeu Dig Incremental",
     galerie: [
       { fichier: "capture-1.jpg", legende: "Capture du jeu" }
     ],
@@ -93,12 +93,12 @@ const REALISATIONS = [
     titre: "Site C&Bio coiffure",
     date: "Oct. 2026",
     // EXEMPLE IA – à réécrire
-    description: "Site professionnel d'une <strong>coiffeuse à domicile</strong>, réalisé bénévolement avec l'aide de l'IA : <strong>réservation et paiement en ligne</strong>, boutique, cartes cadeaux et <strong>espace d'administration</strong>.",
+    description: "Site professionnel d’une <strong>coiffeuse à domicile</strong>, réalisé bénévolement avec l’aide de l’IA : <strong>réservation et paiement en ligne</strong>, boutique, cartes cadeaux et <strong>espace d’administration</strong>.",
     technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Netlify"],
     miniature: "images/cbio-coiffure/miniature.jpg",
-    miniatureAlt: "Page d'accueil du site C&Bio coiffure",
+    miniatureAlt: "Page d’accueil du site C&Bio coiffure",
     galerie: [
-      { fichier: "capture-1.jpg", legende: "Page d'accueil" }
+      { fichier: "capture-1.jpg", legende: "Page d’accueil" }
     ],
     liens: [
       { type: "site", url: "https://cbiocoiffure.fr" }
@@ -119,7 +119,7 @@ const REALISATIONS = [
     date: "Nov. 2026",
     // Textes écrits par Dante
     accroche: "Organiser ma façon d’apprendre et préparer mon parcours professionnel.",
-    description: "J’organise mon environnement de travail pour suivre ma formation à distance et je mets en place une veille informatique avec Pearltrees. Je crée aussi mon profil LinkedIn et je réfléchis à mon projet professionnel avec une carte mentale sur MindMup.",
+    description: "J’ai organisé mon environnement de travail pour suivre ma formation à distance et j’ai mis en place une veille informatique avec Pearltrees. J’ai aussi créé mon profil LinkedIn et j’ai réfléchi à mon projet professionnel avec une carte mentale sur MindMup.",
     technologies: ["LinkedIn", "Pearltrees", "MindMup", "LibreOffice"],
     galerie: [],
     liens: [
@@ -128,7 +128,7 @@ const REALISATIONS = [
     // B1.6 : environnement d'apprentissage, veille, identité professionnelle, projet professionnel
     competences: ["B1.6.1", "B1.6.2", "B1.6.3", "B1.6.4"],
     cadre: "[À RÉDIGER PAR DANTE – FR] Cadre de réalisation (atelier 1, organisation, durée)",
-    descriptionDetaillee: "[À RÉDIGER PAR DANTE – FR] Description détaillée de l'atelier 1"
+    descriptionDetaillee: "[À RÉDIGER PAR DANTE – FR] Description détaillée de l’atelier 1"
   },
 
   {
@@ -139,7 +139,7 @@ const REALISATIONS = [
     date: "Mai 2027",
     // Textes écrits par Dante
     accroche: "Un réseau de médiathèques a besoin d’une application pour gérer son personnel.",
-    description: "Je développe une application de bureau en C#, en six étapes : la base de données MySQL, l’architecture MVC, la documentation technique, les fonctionnalités, une vidéo qui explique comment utiliser l’application, puis le déploiement.",
+    description: "Je développerai une application de bureau en C#, en six étapes : la base de données MySQL, l’architecture MVC, la documentation technique, les fonctionnalités, une vidéo qui explique comment utiliser l’application, puis le déploiement.",
     technologies: ["C#", "MySQL", "MVC", "GitHub"],
     galerie: [],
     liens: [
@@ -151,11 +151,11 @@ const REALISATIONS = [
     descriptionDetaillee: "[À RÉDIGER PAR DANTE – FR] Description détaillée du projet",
     etapes: [
       {
-        titre: "Préparer l'environnement et créer la base de données",
+        titre: "Préparer l’environnement et créer la base de données",
         texte: "[À RÉDIGER PAR DANTE – FR] Étape 1"
       },
       {
-        titre: "Structurer l'application en MVC, créer le dépôt, coder le visuel",
+        titre: "Structurer l’application en MVC, créer le dépôt, coder le visuel",
         texte: "[À RÉDIGER PAR DANTE – FR] Étape 2"
       },
       {
@@ -163,7 +163,7 @@ const REALISATIONS = [
         texte: "[À RÉDIGER PAR DANTE – FR] Étape 3"
       },
       {
-        titre: "Coder les fonctionnalités à partir des cas d'utilisation",
+        titre: "Coder les fonctionnalités à partir des cas d’utilisation",
         texte: "[À RÉDIGER PAR DANTE – FR] Étape 4"
       },
       {
@@ -171,7 +171,7 @@ const REALISATIONS = [
         texte: "[À RÉDIGER PAR DANTE – FR] Étape 5"
       },
       {
-        titre: "Déployer l'application, rédiger le Readme et créer une page dédiée dans ce portfolio",
+        titre: "Déployer l’application, rédiger le Readme et créer une page dédiée dans ce portfolio",
         texte: "[À RÉDIGER PAR DANTE – FR] Étape 6"
       }
     ]
@@ -192,11 +192,11 @@ const REALISATIONS = [
       { type: "contact", url: "index.html#contact" }   // bouton « Me contacter »
     ],
     competences: [],
-    cadre: "[À RÉDIGER PAR DANTE – FR] Cadre de réalisation (4 à 5 semaines, développement d'applications)",
+    cadre: "[À RÉDIGER PAR DANTE – FR] Cadre de réalisation (4 à 5 semaines, développement d’applications)",
     descriptionDetaillee: "[À RÉDIGER PAR DANTE – FR] Description détaillée du stage",
     sections: [
       {
-        titre: "Entreprise d'accueil",
+        titre: "Entreprise d’accueil",
         texte: "[À RÉDIGER PAR DANTE – FR] Entreprise (nom, activité, lieu, service)"
       },
       {
@@ -233,7 +233,7 @@ const REALISATIONS = [
     id: "patrimoine-informatique-lycee",
     categorie: "bloc1",
     statut: "upcoming",
-    titre: "Gestion du patrimoine informatique d'un lycée",
+    titre: "Gestion du patrimoine informatique d’un lycée",
     date: "Déc. 2026 – janv. 2027",
     // Textes écrits par Dante
     accroche: "Gérer le matériel informatique d’un lycée.",
@@ -255,7 +255,7 @@ const REALISATIONS = [
     id: "parc-reseau-lycee",
     categorie: "bloc1",
     statut: "upcoming",
-    titre: "Évolution du parc et du réseau d'un lycée",
+    titre: "Évolution du parc et du réseau d’un lycée",
     date: "Janv. – févr. 2027",
     // Textes écrits par Dante
     accroche: "Faire évoluer le réseau de ce même lycée.",
@@ -317,7 +317,7 @@ const REALISATIONS = [
     id: "mise-a-disposition-service",
     categorie: "bloc1",
     statut: "upcoming",
-    titre: "Mise à disposition d'un service",
+    titre: "Mise à disposition d’un service",
     date: "Mars 2027",
     // Textes écrits par Dante
     accroche: "Déployer GLPI, un outil de gestion de parc.",
