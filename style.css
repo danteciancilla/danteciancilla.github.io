@@ -2823,3 +2823,13 @@ button[disabled] {
 .link-arrow--url {
   overflow-wrap: anywhere;
 }
+
+/* « Voir le détail » souligné quand la souris est sur la vignette cliquable
+   (comme les autres liens au survol). Pas pour les projets « À venir ». */
+.project:has(.project__link:hover) .link-arrow--detail:not(.is-disabled) {
+  text-decoration: underline;
+}
+
+.link-arrow--detail.is-disabled:hover {
+  text-decoration: none;
+}
