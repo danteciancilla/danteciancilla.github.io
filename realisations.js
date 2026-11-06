@@ -45,12 +45,10 @@
    sections      (facultatif) autres parties : { titre, texte }
 
    PROJETS « À VENIR » (statut "upcoming")
-   La vignette n'affiche pas la description : elle affiche
-   « Réalisation prévue … » et le programme. Le lien « Voir le détail »
-   est désactivé tant que le statut est "upcoming".
-   prevue        période prévue, phrase complétée après « Réalisation prévue »
-                 ex. "en mars 2027"
-   programme     { contexte: "…",   → « Contexte : … »
+   La vignette n'affiche pas la description : elle affiche le
+   programme. Le lien « Voir le détail » est désactivé tant que le
+   statut est "upcoming".
+   programme     { contexte: "…",   → phrase seule (le contexte)
                    activites: "…",  → « Au programme : … »
                    texte: "…" }     → texte seul, sans titre
 
@@ -74,7 +72,7 @@ const REALISATIONS = [
     date: "Oct. 2026 – en cours",
     chiffres: "~2 000 visites · 32 favoris · 20 joueurs simultanés",
     // EXEMPLE IA – à réécrire
-    description: "<strong>Jeu Roblox incrémental</strong> créé en binôme avec l'aide de l'IA, publié par le groupe Lumel Studio. Mon rôle : <strong>conception</strong>, <strong>correction de bugs</strong>, tests, publication et promotion.",
+    description: "<strong>Jeu Roblox incrémental</strong> créé en binôme avec l'aide de l'IA, publié par notre groupe Lumel Studio.",
     technologies: ["Roblox Studio", "Luau", "GitHub", "Discord"],
     miniature: "images/dig-incremental/miniature.jpg",
     miniatureAlt: "Capture d'écran du jeu Dig Incremental",
@@ -137,10 +135,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Atelier 2 – MediaTek86",
     date: "Mai 2027",
-    prevue: "en mai 2027",
     // Programme : texte donné par Dante
     programme: {
-      contexte: "un réseau de médiathèques qui a besoin d'une application pour gérer son personnel",
+      contexte: "Un réseau de médiathèques qui a besoin d'une application pour gérer son personnel",
       activites: "une application de bureau en C#, en 6 étapes : base de données MySQL, architecture MVC, documentation technique, fonctionnalités, vidéo de documentation utilisateur, déploiement"
     },
     // EXEMPLE IA – à réécrire
@@ -188,10 +185,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Stage de 1re année",
     date: "Entre mai et août 2027",
-    prevue: "entre mai et août 2027",
     // Texte donné par Dante
     programme: {
-      texte: "Stage de 4 à 5 semaines en développement d'applications, entreprise à définir."
+      texte: "Stage de 4 à 5 semaines en développement d'applications."
     },
     description: "[À RÉDIGER PAR DANTE – FR] Description courte du stage",
     technologies: [],
@@ -224,10 +220,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Application de bureau en C#",
     date: "Nov. – déc. 2026",
-    prevue: "de novembre à décembre 2026",
     // Programme : texte donné par Dante
     programme: {
-      contexte: "corriger et faire évoluer une application existante",
+      contexte: "Corriger et faire évoluer une application existante",
       activites: "bases de la programmation, débogage, interface graphique et programmation événementielle, puis programmation objet, revue de code sur GitHub"
     },
     // EXEMPLE IA – à réécrire
@@ -246,10 +241,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Gestion du patrimoine informatique d'un lycée",
     date: "Déc. 2026 – janv. 2027",
-    prevue: "de décembre 2026 à janvier 2027",
     // Programme : texte donné par Dante
     programme: {
-      contexte: "le parc informatique d'un lycée",
+      contexte: "Le parc informatique d'un lycée",
       activites: "inventorier le matériel avec un logiciel de gestion de parc, mettre en place des partages de fichiers et des niveaux d'accès, appliquer des normes, gérer des sauvegardes"
     },
     description: "[À RÉDIGER PAR DANTE – FR] Description courte",
@@ -272,10 +266,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Évolution du parc et du réseau d'un lycée",
     date: "Janv. – févr. 2027",
-    prevue: "de janvier à février 2027",
     // Programme : texte donné par Dante
     programme: {
-      contexte: "le réseau du même lycée",
+      contexte: "Le réseau du même lycée",
       activites: "installer des machines virtuelles Windows 11 et Ubuntu, intégrer des postes dans un domaine Active Directory, diagnostiquer des pannes, gérer les droits d'accès, faire évoluer l'architecture réseau"
     },
     description: "[À RÉDIGER PAR DANTE – FR] Description courte",
@@ -296,10 +289,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Sites web",
     date: "Févr. 2027",
-    prevue: "en février 2027",
     // Programme : texte donné par Dante
     programme: {
-      contexte: "la refonte d'un site de vente en ligne",
+      contexte: "La refonte d'un site de vente en ligne",
       activites: "pages en HTML et CSS, interactivité en JavaScript, partie serveur en PHP, site sous WordPress, conformité RGPD, référencement, mise en ligne"
     },
     // EXEMPLE IA – à réécrire
@@ -322,10 +314,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Gestion de projet",
     date: "Févr. 2027",
-    prevue: "en février 2027",
     // Programme : texte donné par Dante
     programme: {
-      contexte: "un projet de développement",
+      contexte: "Un projet de développement",
       activites: "planifier un projet avec MS Project (découpage des tâches, ressources, coûts), travailler en méthode Agile, gérer les versions avec Git (branches, conflits)"
     },
     description: "[À RÉDIGER PAR DANTE – FR] Description courte",
@@ -347,10 +338,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Mise à disposition d'un service",
     date: "Mars 2027",
-    prevue: "en mars 2027",
     // Programme : texte donné par Dante
     programme: {
-      contexte: "le déploiement d'un outil de gestion de parc (GLPI)",
+      contexte: "Le déploiement d'un outil de gestion de parc (GLPI)",
       activites: "installer un équipement, préparer un environnement de test, déployer et tester GLPI, rédiger les documentations technique et utilisateur"
     },
     description: "[À RÉDIGER PAR DANTE – FR] Description courte",
@@ -374,7 +364,6 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Jeu 2D",
     date: "Mars 2027",
-    prevue: "en mars 2027",
     // Programme : texte donné par Dante
     programme: {
       activites: "modéliser l'application, programmer un jeu en programmation objet (joueurs, murs, déplacements, combats), corriger les erreurs et écrire des tests unitaires"
@@ -395,7 +384,6 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Application de gestion des habilitations",
     date: "Mars 2027",
-    prevue: "en mars 2027",
     // Programme : texte donné par Dante
     programme: {
       activites: "créer une base de données et une application en C# qui s'y connecte, avec une authentification sécurisée"
@@ -416,7 +404,6 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Bases de données",
     date: "Avr. 2027",
-    prevue: "en avril 2027",
     // Programme : texte donné par Dante
     programme: {
       activites: "analyser et interroger une base PostgreSQL avec des requêtes SQL, concevoir une base (modélisation MCD et MLD), découvrir le NoSQL avec MongoDB"

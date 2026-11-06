@@ -47,15 +47,14 @@ const TEXTES = {
   "hero.eyebrow": "Portfolio",
   "hero.role": "Étudiant en informatique, développement d'applications",
   "hero.sub": "1re année BTS SIO option SLAM · CNED",
-  // EXEMPLE IA – à réécrire
-  "hero.tagline": "J'apprends à créer des applications, des sites web et des jeux. Je recherche un <strong>stage de 4 à 5 semaines</strong> à partir de mai 2027, à Sète ou à Montpellier.",
+  // Texte écrit par Dante
+  "hero.tagline": "Passionné par le développement, j'apprends à créer des applications, des sites web et des jeux.",
   "hero.ctaProjects": "Voir mes projets",
   "hero.ctaCv": "Télécharger mon CV",
   "hero.ctaContact": "Me contacter",
   "hero.photoAlt": "Photo de Dante Ciancilla",
   "hero.cardRole": "BTS SIO SLAM · CNED",
   "hero.location": "Sète (34)",
-  "hero.available": "Stage recherché · entre mai et août 2027",
   "hero.linkedinLabel": "LinkedIn (nouvel onglet)",
   "hero.githubLabel": "GitHub (nouvel onglet)",
   "hero.emailLabel": "Envoyer un e-mail",
@@ -72,7 +71,7 @@ const TEXTES = {
   "profile.eyebrow": "À propos",
   "profile.title": "Profil",
   // Ma présentation LinkedIn (écrite par moi), mise en forme avec du gras
-  "profile.text": "<p>Étudiant en 1re année de <strong>BTS SIO option SLAM</strong> au CNED, je recherche un <strong>stage de 4 à 5 semaines</strong> en développement (web, logiciel ou jeu vidéo) à partir de mai 2027, à Sète ou à Montpellier.</p><p>Venu au code par le jeu vidéo, j'ai co-créé un <strong>jeu Roblox</strong> qui approche les 2 000 visites, et réalisé le <strong>site professionnel d'une coiffeuse à domicile</strong>.</p><p>Scolarisé à distance depuis la 4e, je suis <strong>autonome</strong>, à l'aise en anglais (C1) et j'apprécie les retours francs.</p>",
+  "profile.text": "<p>Étudiant en 1re année de <strong>BTS SIO option SLAM</strong> au CNED, je recherche un <strong>stage de 4 à 5 semaines</strong> en développement entre mai et août 2027, à Sète ou à Montpellier.</p><p>Venu au code par le jeu vidéo, j'ai co-créé un <strong>jeu Roblox</strong> qui approche les 2 000 visites, et réalisé le <strong>site professionnel d'une coiffeuse à domicile</strong>.</p><p>Scolarisé à distance depuis la 4e, je suis <strong>autonome</strong>, à l'aise en anglais (C1) et j'apprécie les retours francs.</p>",
   "training.title": "Formation actuelle",
   "training.name": "BTS SIO – Option SLAM",
   "training.school": "CNED · formation à distance",
@@ -138,9 +137,6 @@ const TEXTES = {
   "link.detailSoon": "Détail disponible une fois la réalisation terminée",
 
   // Vignettes des projets « À venir »
-  "planned.when": "Réalisation prévue {p}",
-  "planned.whenDate": "Réalisation prévue : {p}",
-  "planned.context": "Contexte :",
   "planned.program": "Au programme :",
   "comp.label": "Compétences du bloc 1 couvertes",
 
@@ -168,8 +164,7 @@ const TEXTES = {
   "journey.sub": "Du plus récent au plus ancien",
   "journey.intern.date": "Entre mai et août 2027",
   "journey.intern.title": "Stage de 1re année",
-  "journey.intern.sub": "4 à 5 semaines · Développement d'applications (option SLAM)",
-  "journey.intern.place": "Entreprise à définir",
+  "journey.intern.sub": "4 à 5 semaines · Développement d'applications",
   "journey.bts.date": "Depuis oct. 2026 (2026 – 2028)",
   "journey.bts.title": "BTS SIO option SLAM",
   "journey.bts.full": "Brevet de Technicien Supérieur Services Informatiques aux Organisations, option Solutions Logicielles et Applications Métiers",

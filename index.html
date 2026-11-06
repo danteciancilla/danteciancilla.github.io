@@ -256,10 +256,6 @@
                 <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
                 <span data-texte="hero.location">Sète (34)</span>
               </p>
-              <p class="availability">
-                <span class="availability__dot" aria-hidden="true"></span>
-                <span data-texte="hero.available">Stage recherché · entre mai et août 2027</span>
-              </p>
               <div class="hero__card-links">
                 <a class="icon-btn" href="https://www.linkedin.com/in/dante-ciancilla/" target="_blank" rel="noopener noreferrer"
                    aria-label="LinkedIn (nouvel onglet)" data-texte-attr="aria-label:hero.linkedinLabel">
@@ -335,19 +331,22 @@
             <!-- Texte de présentation : à écrire dans textes.js (clé profile.text) -->
             <div class="profile__text reveal" data-texte-html="profile.text"></div>
 
+            <!-- Boutons : LinkedIn et téléphone sur une ligne, e-mail (plus long) en dessous -->
             <div class="profile__links reveal">
-              <a class="btn btn--ghost" href="https://www.linkedin.com/in/dante-ciancilla/" target="_blank" rel="noopener noreferrer">
-                <svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg>
-                <span>LinkedIn</span>
-                <span class="sr-only" data-texte="link.newTab">(nouvel onglet)</span>
-              </a>
+              <div class="profile__links-row">
+                <a class="btn btn--ghost" href="https://www.linkedin.com/in/dante-ciancilla/" target="_blank" rel="noopener noreferrer">
+                  <svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg>
+                  <span>LinkedIn</span>
+                  <span class="sr-only" data-texte="link.newTab">(nouvel onglet)</span>
+                </a>
+                <a class="btn btn--ghost" href="tel:+33782707239">
+                  <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                  <span data-texte="contact.phone">07 82 70 72 39</span>
+                </a>
+              </div>
               <a class="btn btn--ghost" href="mailto:danteciancilla@gmail.com">
                 <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
                 <span>danteciancilla@gmail.com</span>
-              </a>
-              <a class="btn btn--ghost" href="tel:+33782707239">
-                <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
-                <span data-texte="contact.phone">07 82 70 72 39</span>
               </a>
             </div>
           </div>
@@ -450,11 +449,7 @@
                   <h3 class="timeline__title" data-texte="journey.intern.title">Stage de 1re année</h3>
                   <span class="status status--upcoming" data-texte="status.upcoming">À venir</span>
                 </div>
-                <p class="timeline__sub" data-texte="journey.intern.sub">4 à 5 semaines · Développement d'applications (option SLAM)</p>
-                <p class="timeline__place">
-                  <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
-                  <span data-texte="journey.intern.place">Entreprise à définir</span>
-                </p>
+                <p class="timeline__sub" data-texte="journey.intern.sub">4 à 5 semaines · Développement d'applications</p>
               </div>
             </li>
 
@@ -576,6 +571,23 @@
               </div>
             </article>
 
+            <!-- Bases de données -->
+            <article class="skill-card reveal">
+              <div class="skill-card__head">
+                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-database"></use></svg></span>
+                <h3 class="skill-card__title" data-texte="cat.db">Bases de données</h3>
+              </div>
+              <div class="skill-row">
+                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <ul class="chips">
+                  <li class="chip chip--logo"><span class="chip__logo" role="img" aria-label="Icône SQL"><svg class="icon"><use href="#i-database"></use></svg></span>SQL</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/postgresql/postgresql-original.svg" alt="Logo PostgreSQL" width="22" height="22" loading="lazy">PostgreSQL</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/mysql/mysql-original.svg" alt="Logo MySQL" width="22" height="22" loading="lazy">MySQL</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/mongodb/mongodb-original.svg" alt="Logo MongoDB" width="22" height="22" loading="lazy">MongoDB</li>
+                </ul>
+              </div>
+            </article>
+
             <!-- Web -->
             <article class="skill-card reveal">
               <div class="skill-card__head">
@@ -590,23 +602,6 @@
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/javascript/javascript-original.svg" alt="Logo JavaScript" width="22" height="22" loading="lazy">JavaScript</li>
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/php/php-original.svg" alt="Logo PHP" width="22" height="22" loading="lazy">PHP</li>
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/wordpress/wordpress-plain.svg" alt="Logo WordPress" width="22" height="22" loading="lazy">WordPress</li>
-                </ul>
-              </div>
-            </article>
-
-            <!-- Bases de données -->
-            <article class="skill-card reveal">
-              <div class="skill-card__head">
-                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-database"></use></svg></span>
-                <h3 class="skill-card__title" data-texte="cat.db">Bases de données</h3>
-              </div>
-              <div class="skill-row">
-                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
-                <ul class="chips">
-                  <li class="chip chip--logo"><span class="chip__logo" role="img" aria-label="Icône SQL"><svg class="icon"><use href="#i-database"></use></svg></span>SQL</li>
-                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/postgresql/postgresql-original.svg" alt="Logo PostgreSQL" width="22" height="22" loading="lazy">PostgreSQL</li>
-                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/mysql/mysql-original.svg" alt="Logo MySQL" width="22" height="22" loading="lazy">MySQL</li>
-                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/mongodb/mongodb-original.svg" alt="Logo MongoDB" width="22" height="22" loading="lazy">MongoDB</li>
                 </ul>
               </div>
             </article>
@@ -645,7 +640,7 @@
               </div>
               <div class="skill-row">
                 <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
-                <ul class="chips">
+                <ul class="chips chips--auto">
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/windows11/windows11-original.svg" alt="Logo Windows" width="22" height="22" loading="lazy">Windows</li>
                   <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/ubuntu/ubuntu-original.svg" alt="Logo Linux (Ubuntu)" width="22" height="22" loading="lazy">Linux (Ubuntu)</li>
                   <li class="chip chip--logo"><span class="chip__logo" role="img" aria-label="Icône Active Directory"><svg class="icon"><use href="#i-network"></use></svg></span>Active Directory</li>

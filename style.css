@@ -735,39 +735,6 @@ button {
   height: 15px;
 }
 
-/* Pastille « Stage recherché » avec un point qui pulse */
-.availability {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: fit-content;
-  margin: 14px auto 0;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.availability__dot {
-  position: relative;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.availability__dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: pulse 2s ease-out infinite;
-}
-
 .hero__card-links {
   display: flex;
   justify-content: center;
@@ -2037,11 +2004,6 @@ a.contact-item__value:hover {
   }
 }
 
-@keyframes pulse {
-  0%   { transform: scale(1);   opacity: 0.7; }
-  100% { transform: scale(2.8); opacity: 0; }
-}
-
 @keyframes dialog-in {
   from { opacity: 0; translate: 0 16px; scale: 0.97; }
   to   { opacity: 1; translate: 0 0;    scale: 1; }
@@ -2175,10 +2137,6 @@ a.contact-item__value:hover {
   .hero__card-body {
     padding: 0;
     text-align: left;
-  }
-
-  .availability {
-    margin: 10px 0 0;
   }
 
   .hero__card-links {
@@ -2343,9 +2301,6 @@ a.contact-item__value:hover {
     animation: none !important;
   }
 
-  .availability__dot::after {
-    display: none;
-  }
 }
 
 
@@ -2812,17 +2767,6 @@ button[disabled] {
   gap: 8px;
 }
 
-/* « Réalisation prévue en … » */
-.planned__when {
-  width: fit-content;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
 /* « Contexte : … » et « Au programme : … » */
 .planned__line {
   color: var(--text-2);
@@ -2862,3 +2806,40 @@ button[disabled] {
   background: var(--surface);
 }
 
+
+
+/* =====================================================================
+   24. PROFIL ET COMPÉTENCES : AGENCEMENT
+   ===================================================================== */
+
+/* Profil : LinkedIn et téléphone sur une ligne, e-mail en dessous */
+.profile__links {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile__links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Compétences : niveau et logos centrés, logos rangés deux par deux */
+.skill-card .skill-row {
+  text-align: center;
+}
+
+.skill-card .chips {
+  justify-content: center;
+}
+
+.skill-card .chip--logo {
+  flex: 0 0 calc(50% - 4px);
+  justify-content: center;
+  white-space: nowrap;
+}
+
+/* Noms longs (Systèmes et réseaux) : chaque logo garde sa largeur naturelle */
+.skill-card .chips--auto .chip--logo {
+  flex: 0 0 auto;
+}

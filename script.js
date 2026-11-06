@@ -363,23 +363,19 @@ document.addEventListener("DOMContentLoaded", function () {
     return projet.statut === "upcoming";
   }
 
-  // Ligne « Contexte : … » ou « Au programme : … »
+  // Ligne « Au programme : … »
   function lignePlan(libelle, texte) {
     const ligne = creer("p", "planned__line");
     ligne.append(creer("strong", "", libelle + " "), document.createTextNode(texte));
     return ligne;
   }
 
-  // Bloc d'un projet « À venir » : période prévue + programme (champ « programme »)
+  // Bloc d'un projet « À venir » : le programme (champ « programme ») à la place de la description.
+  // La période est déjà affichée en haut de la vignette.
   function blocPrevu(projet, classe) {
     const bloc = creer("div", "planned " + (classe || ""));
-    const quand = projet.prevue
-      ? t("planned.when").replace("{p}", projet.prevue)
-      : t("planned.whenDate").replace("{p}", projet.date);
-    bloc.appendChild(creer("p", "planned__when", quand));
-
     const programme = projet.programme || {};
-    if (estRedige(programme.contexte)) bloc.appendChild(lignePlan(t("planned.context"), programme.contexte));
+    if (estRedige(programme.contexte)) bloc.appendChild(creer("p", "planned__line", programme.contexte));
     if (estRedige(programme.activites)) bloc.appendChild(lignePlan(t("planned.program"), programme.activites));
     if (estRedige(programme.texte)) bloc.appendChild(creer("p", "planned__line", programme.texte));
     return bloc;
