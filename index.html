@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  Portfolio de Dante Ciancilla – BTS SIO option SLAM (CNED)
+  ---------------------------------------------------------------------
+  Organisation des fichiers :
+    - index.html  : la structure de la page (ce fichier)
+    - style.css   : l'apparence (couleurs, mise en page, animations)
+    - textes.js   : les textes de l'interface
+    - realisations.js      : la liste de mes réalisations (projets)
+    - competences-bloc1.js : les compétences officielles du bloc 1
+    - script.js   : les interactions (thème, menu, animations,
+                    vignettes, formulaire…)
+    - realisation.html     : page de détail (modèle unique pour toutes les réalisations)
+    - mentions-legales.html : mentions légales et confidentialité
+    - images/     : photo, CV, captures (un dossier par réalisation)
+
+  Important : les textes écrits ici en français ne servent que de
+  « secours ». Au chargement, script.js les remplace par ceux du
+  fichier textes.js. Pour modifier un texte, il faut donc le modifier
+  dans textes.js (repère : l'attribut data-texte="nom.de.la.cle").
+  =====================================================================
+-->
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Titre de l'onglet et description pour les moteurs de recherche -->
+  <title data-texte="meta.title">Dante Ciancilla – Portfolio | BTS SIO SLAM</title>
+  <meta name="description" data-texte-attr="content:meta.description"
+        content="Portfolio de Dante Ciancilla, étudiant en BTS SIO option SLAM au CNED : projets, parcours, compétences et contact.">
+  <meta name="author" content="Dante Ciancilla">
+  <link rel="canonical" href="https://danteciancilla.github.io/">
+
+  <!-- Couleur de la barre du navigateur sur mobile (mise à jour par script.js quand on change de thème) -->
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" id="theme-color" content="#0A0914">
+
+  <!-- Aperçu quand le lien est partagé (LinkedIn, Discord, WhatsApp…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dante Ciancilla – Portfolio">
+  <meta property="og:title" content="Dante Ciancilla – Portfolio BTS SIO SLAM">
+  <meta property="og:description" content="Étudiant en BTS SIO option SLAM au CNED : projets, parcours, compétences et contact.">
+  <meta property="og:url" content="https://danteciancilla.github.io/">
+  <meta property="og:image" content="https://danteciancilla.github.io/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dante Ciancilla – Portfolio BTS SIO SLAM">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icône de l'onglet -->
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <!-- Police Inter (Google Fonts). Si elle ne charge pas, la police du système prend le relais. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!--
+    Petit script exécuté AVANT l'affichage de la page :
+    1. signale que JavaScript est actif (les animations en dépendent) ;
+    2. applique le thème mémorisé, sinon le mode sombre (thème par défaut),
+       pour éviter un « flash » blanc au chargement.
+  -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add("js");
+
+      var theme = null;
+      try {
+        theme = localStorage.getItem("theme");
+      } catch (e) { /* localStorage bloqué : on garde le thème par défaut */ }
+
+      // Pas de choix mémorisé : le mode sombre est utilisé par défaut
+      if (theme !== "light" && theme !== "dark") {
+        theme = "dark";
+      }
+      root.setAttribute("data-theme", theme);
+
+      // Sécurité : si script.js ne se lance pas, on affiche quand même tout le contenu.
+      setTimeout(function () {
+        if (!root.classList.contains("js-ready")) {
+          root.classList.remove("js");
+        }
+      }, 4000);
+    })();
+  </script>
+
+  <!-- "defer" : les scripts s'exécutent une fois toute la page lue -->
+  <script src="textes.js" defer></script>
+  <script src="competences-bloc1.js" defer></script>
+  <script src="realisations.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <!-- Informations structurées pour Google (fiche « personne ») -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dante Ciancilla",
+    "url": "https://danteciancilla.github.io/",
+    "jobTitle": "Étudiant en BTS SIO option SLAM",
+    "telephone": "+33782707239",
+    "email": "mailto:danteciancilla@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Sète", "addressCountry": "FR" },
+    "sameAs": [
+      "https://www.linkedin.com/in/dante-ciancilla/",
+      "https://github.com/danteciancilla"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Lien d'évitement : permet aux utilisateurs du clavier d'aller directement au contenu -->
+  <a class="skip-link" href="#contenu" data-texte="skip">Aller au contenu</a>
+
+  <!--
+    Bibliothèque d'icônes (format SVG).
+    Chaque icône est un <symbol> avec un identifiant (ex. "i-mail").
+    On l'affiche ailleurs avec : <svg class="icon"><use href="#i-mail"></use></svg>
+  -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="4"/><path d="M7.5 10.5v6M7.5 7.5v.01M11.5 16.5v-6M11.5 13a2.5 2.5 0 0 1 5 0v3.5"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-grad" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2.5 9 2.5 12 0v-5M22 10v5"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 8 5-3 5 3-1.5-8"/></symbol>
+    <symbol id="i-pickaxe" viewBox="0 0 24 24"><path d="M4 20 15.5 8.5"/><path d="M8 5Q18.5 5.5 19 16"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.12 8.12 12 12M20 4 8.12 15.88M14.8 14.8 20 20"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H6"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4V8z"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><path d="M6 7h.01M6 17h.01"/></symbol>
+    <symbol id="i-gantt" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 7h6M10 11h8M7 15h6"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M12 8v4M5 16v-4h14v4"/></symbol>
+    <symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></symbol>
+  </svg>
+
+  <!-- ============================ EN-TÊTE ============================ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#accueil" data-texte-attr="aria-label:logo.label" aria-label="Dante Ciancilla – retour à l'accueil">
+        <span class="logo__mark" aria-hidden="true">DC</span>
+        <span class="logo__text">Dante Ciancilla</span>
+      </a>
+
+      <!-- Menu principal (devient un menu déroulant sur mobile) -->
+      <nav class="nav" id="nav" data-texte-attr="aria-label:nav.label" aria-label="Navigation principale">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#accueil" data-texte="nav.home">Accueil</a></li>
+          <li><a class="nav__link" href="#profil" data-texte="nav.profile">Profil</a></li>
+          <li><a class="nav__link" href="#projets" data-texte="nav.projects">Réalisations</a></li>
+          <li><a class="nav__link" href="#parcours" data-texte="nav.journey">Parcours</a></li>
+          <li><a class="nav__link" href="#competences" data-texte="nav.skills">Compétences</a></li>
+          <li><a class="nav__link" href="#contact" data-texte="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+
+        <!-- Bouton clair / sombre (le texte pour lecteurs d'écran est mis par script.js) -->
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Activer le mode sombre">
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+        </button>
+
+        <!-- Bouton « hamburger » (visible uniquement sur mobile) -->
+        <button class="icon-btn menu-toggle" id="menu-toggle" type="button"
+                aria-controls="nav" aria-expanded="false" aria-label="Ouvrir le menu">
+          <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"></use></svg>
+          <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ============================ 1. ACCUEIL ============================ -->
+    <section class="hero" id="accueil" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero__grid">
+          <!-- Colonne de gauche : présentation -->
+          <!-- style="--i:…" = ordre d'apparition de l'élément au chargement -->
+          <div class="hero__content">
+            <p class="eyebrow hero-anim" style="--i:0" data-texte="hero.eyebrow">Portfolio</p>
+            <h1 class="hero__title hero-anim" style="--i:1" id="hero-title">Dante Ciancilla</h1>
+            <p class="hero__role hero-anim" style="--i:2" data-texte="hero.role">Étudiant en informatique, développement d'applications</p>
+            <p class="hero__sub hero-anim" style="--i:3" data-texte="hero.sub">1re année BTS SIO option SLAM · CNED</p>
+
+            <!-- Phrase d'accroche : à écrire dans textes.js (clé hero.tagline) -->
+            <div class="hero__tagline hero-anim" style="--i:4" data-texte-html="hero.tagline"></div>
+
+            <div class="hero__actions hero-anim" style="--i:5">
+              <a class="btn btn--primary" href="#projets">
+                <span data-texte="hero.ctaProjects">Voir mes projets</span>
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+              </a>
+              <!-- Le fichier cv.pdf doit être placé à la racine du site -->
+              <a class="btn btn--ghost" href="cv.pdf" download="CV-Dante-Ciancilla.pdf">
+                <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+                <span data-texte="hero.ctaCv">Télécharger mon CV</span>
+              </a>
+              <a class="btn btn--ghost" href="#contact">
+                <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+                <span data-texte="hero.ctaContact">Me contacter</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Colonne de droite : carte avec la photo -->
+          <aside class="hero__card hero-anim" style="--i:3" aria-labelledby="card-name">
+            <div class="hero__photo">
+              <!-- Mets ta photo dans images/photo.jpg. Tant qu'elle est absente, une image provisoire s'affiche. -->
+              <img id="photo" src="images/photo.jpg" data-fallback="images/photo-placeholder.svg"
+                   alt="Photo de Dante Ciancilla" data-texte-attr="alt:hero.photoAlt"
+                   width="480" height="600" fetchpriority="high">
+            </div>
+            <div class="hero__card-body">
+              <p class="hero__card-name" id="card-name">Dante Ciancilla</p>
+              <p class="hero__card-role" data-texte="hero.cardRole">BTS SIO SLAM · CNED</p>
+              <p class="hero__card-loc">
+                <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+                <span data-texte="hero.location">Sète (34)</span>
+              </p>
+              <p class="availability">
+                <span class="availability__dot" aria-hidden="true"></span>
+                <span data-texte="hero.available">Stage recherché · entre mai et août 2027</span>
+              </p>
+              <div class="hero__card-links">
+                <a class="icon-btn" href="https://www.linkedin.com/in/dante-ciancilla/" target="_blank" rel="noopener noreferrer"
+                   aria-label="LinkedIn (nouvel onglet)" data-texte-attr="aria-label:hero.linkedinLabel">
+                  <svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg>
+                </a>
+                <a class="icon-btn" href="mailto:danteciancilla@gmail.com"
+                   aria-label="Envoyer un e-mail" data-texte-attr="aria-label:hero.emailLabel">
+                  <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+                </a>
+                <a class="icon-btn" href="tel:+33782707239"
+                   aria-label="Appeler le 07 82 70 72 39" data-texte-attr="aria-label:hero.phoneLabel">
+                  <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                </a>
+                <a class="icon-btn" href="https://github.com/danteciancilla" target="_blank" rel="noopener noreferrer"
+                   aria-label="GitHub (nouvel onglet)" data-texte-attr="aria-label:hero.githubLabel">
+                  <svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg>
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Chiffres clés : data-count = valeur finale du compteur -->
+        <ul class="stats" aria-label="Chiffres clés" data-texte-attr="aria-label:stats.label">
+          <li class="stat hero-anim" style="--i:6">
+            <span class="stat__icon" aria-hidden="true"><svg class="icon"><use href="#i-eye"></use></svg></span>
+            <p class="stat__value">
+              <span class="counter" data-count="2000" data-prefix="~" aria-hidden="true">~2 000</span>
+              <span class="sr-only counter-sr">~2 000</span>
+            </p>
+            <p class="stat__label" data-texte="stats.visits">visites sur mon jeu Roblox</p>
+          </li>
+          <li class="stat hero-anim" style="--i:7">
+            <span class="stat__icon" aria-hidden="true"><svg class="icon"><use href="#i-users"></use></svg></span>
+            <p class="stat__value">
+              <span class="counter" data-count="20" aria-hidden="true">20</span>
+              <span class="sr-only counter-sr">20</span>
+            </p>
+            <p class="stat__label" data-texte="stats.players">joueurs simultanés</p>
+          </li>
+          <li class="stat hero-anim" style="--i:8">
+            <span class="stat__icon" aria-hidden="true"><svg class="icon"><use href="#i-globe"></use></svg></span>
+            <p class="stat__value">
+              <span class="counter" data-count="2" aria-hidden="true">2</span>
+              <span class="sr-only counter-sr">2</span>
+            </p>
+            <p class="stat__label" data-texte="stats.online">projets en ligne</p>
+          </li>
+          <li class="stat hero-anim" style="--i:9">
+            <span class="stat__icon" aria-hidden="true"><svg class="icon"><use href="#i-languages"></use></svg></span>
+            <p class="stat__value">
+              <!-- Ce compteur passe par les niveaux A1 → A2 → B1 → B2 → C1 -->
+              <span class="counter" data-steps="A1,A2,B1,B2,C1" aria-hidden="true">C1</span>
+              <span class="sr-only counter-sr">C1</span>
+            </p>
+            <p class="stat__label" data-texte="stats.english">Anglais</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================ 2. PROFIL ============================ -->
+    <section class="section" id="profil" aria-labelledby="profil-title">
+      <div class="container">
+        <!-- Le titre est dans la colonne de gauche : les cartes de droite démarrent à sa hauteur -->
+        <div class="profile">
+          <div class="profile__main">
+            <header class="section-head">
+              <p class="eyebrow reveal" data-texte="profile.eyebrow">À propos</p>
+              <h2 class="section-title reveal" id="profil-title" data-texte="profile.title">Profil</h2>
+            </header>
+
+            <!-- Texte de présentation : à écrire dans textes.js (clé profile.text) -->
+            <div class="profile__text reveal" data-texte-html="profile.text"></div>
+
+            <div class="profile__links reveal">
+              <a class="btn btn--ghost" href="https://www.linkedin.com/in/dante-ciancilla/" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg>
+                <span>LinkedIn</span>
+                <span class="sr-only" data-texte="link.newTab">(nouvel onglet)</span>
+              </a>
+              <a class="btn btn--ghost" href="mailto:danteciancilla@gmail.com">
+                <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+                <span>danteciancilla@gmail.com</span>
+              </a>
+              <a class="btn btn--ghost" href="tel:+33782707239">
+                <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                <span data-texte="contact.phone">07 82 70 72 39</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="profile__side">
+            <!-- Carte : formation actuelle -->
+            <article class="info-card reveal">
+              <div class="info-card__head">
+                <span class="info-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-grad"></use></svg></span>
+                <h3 class="info-card__title" data-texte="training.title">Formation actuelle</h3>
+              </div>
+              <p class="info-card__name" data-texte="training.name">BTS SIO – Option SLAM</p>
+              <p class="info-card__meta">
+                <span data-texte="training.school">CNED · formation à distance</span>
+                <span class="chip chip--date">2026 – 2028</span>
+              </p>
+              <button class="btn-link" type="button" data-open-dialog="bts-dialog">
+                <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg>
+                <span data-texte="training.more">En savoir plus sur le BTS</span>
+              </button>
+            </article>
+
+            <!-- Carte : recherche de stage (encadré demandé par le CNED) -->
+            <article class="info-card info-card--accent reveal">
+              <div class="info-card__head">
+                <span class="info-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-briefcase"></use></svg></span>
+                <h3 class="info-card__title" data-texte="intern.title">Recherche de stage</h3>
+              </div>
+              <dl class="facts">
+                <div class="facts__row">
+                  <dt data-texte="intern.duration">Durée</dt>
+                  <dd data-texte="intern.durationValue">4 à 5 semaines</dd>
+                </div>
+                <div class="facts__row">
+                  <dt data-texte="intern.period">Période</dt>
+                  <dd data-texte="intern.periodValue">Entre mai et août 2027</dd>
+                </div>
+                <div class="facts__row">
+                  <dt data-texte="intern.field">Domaine</dt>
+                  <dd data-texte="intern.fieldValue">Développement d'applications (option SLAM)</dd>
+                </div>
+                <div class="facts__row">
+                  <dt data-texte="intern.place">Lieu</dt>
+                  <dd data-texte="intern.placeValue">Sète ou Montpellier</dd>
+                </div>
+              </dl>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 3. RÉALISATIONS ============================ -->
+    <section class="section" id="projets" aria-labelledby="projets-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow reveal" data-texte="projects.eyebrow">Projets</p>
+          <h2 class="section-title reveal" id="projets-title" data-texte="projects.title">Réalisations professionnelles</h2>
+        </header>
+
+        <!-- Filtres : data-filter correspond à la « categorie » des réalisations (realisations.js) -->
+        <div class="filters reveal" role="group" aria-label="Filtrer les réalisations" data-texte-attr="aria-label:filter.label">
+          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true" data-texte="filter.all">Tous</button>
+          <button class="filter-btn" type="button" data-filter="perso" aria-pressed="false" data-texte="filter.perso">Personnels</button>
+          <button class="filter-btn" type="button" data-filter="bloc1" aria-pressed="false" data-texte="filter.bloc1">Scolaires – Bloc 1</button>
+          <button class="filter-btn" type="button" data-filter="bloc2" aria-pressed="false" data-texte="filter.bloc2">Scolaires – Bloc 2</button>
+          <button class="filter-btn" type="button" data-filter="atelier" aria-pressed="false" data-texte="filter.atelier">Ateliers et stage</button>
+        </div>
+
+        <!--
+          Les vignettes ne sont pas écrites ici : script.js les fabrique à
+          partir de la liste du fichier realisations.js.
+          Pour ajouter une réalisation : modifier uniquement realisations.js.
+        -->
+        <div class="projects-root" id="projects-root"></div>
+        <noscript><p class="noscript-note">JavaScript est nécessaire pour afficher les réalisations.</p></noscript>
+      </div>
+    </section>
+
+    <!-- ============================ 4. PARCOURS ============================ -->
+    <section class="section" id="parcours" aria-labelledby="parcours-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow reveal" data-texte="journey.eyebrow">Formation et expériences</p>
+          <h2 class="section-title reveal" id="parcours-title" data-texte="journey.title">Parcours</h2>
+          <p class="section-sub reveal" data-texte="journey.sub">Du plus récent au plus ancien</p>
+        </header>
+
+        <!-- La frise : la ligne grise (track) se remplit en couleur (fill) pendant le défilement -->
+        <div class="timeline" id="timeline">
+          <div class="timeline__track" aria-hidden="true"><span class="timeline__fill"></span></div>
+
+          <ol class="timeline__list">
+            <!-- Stage de 1re année -->
+            <li class="timeline__item reveal">
+              <p class="timeline__date"><time datetime="2027-05" data-texte="journey.intern.date">Entre mai et août 2027</time></p>
+              <span class="timeline__dot" aria-hidden="true"><svg class="icon"><use href="#i-briefcase"></use></svg></span>
+              <div class="timeline__card">
+                <div class="timeline__top">
+                  <h3 class="timeline__title" data-texte="journey.intern.title">Stage de 1re année</h3>
+                  <span class="status status--upcoming" data-texte="status.upcoming">À venir</span>
+                </div>
+                <p class="timeline__sub" data-texte="journey.intern.sub">4 à 5 semaines · Développement d'applications (option SLAM)</p>
+                <p class="timeline__place">
+                  <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+                  <span data-texte="journey.intern.place">Entreprise à définir</span>
+                </p>
+              </div>
+            </li>
+
+            <!-- BTS SIO option SLAM -->
+            <li class="timeline__item reveal">
+              <p class="timeline__date"><time datetime="2026-10" data-texte="journey.bts.date">Depuis oct. 2026 (2026 – 2028)</time></p>
+              <span class="timeline__dot" aria-hidden="true"><svg class="icon"><use href="#i-grad"></use></svg></span>
+              <div class="timeline__card">
+                <div class="timeline__top">
+                  <h3 class="timeline__title" data-texte="journey.bts.title">BTS SIO option SLAM</h3>
+                  <span class="status status--progress" data-texte="status.progress">En cours</span>
+                </div>
+                <!-- Sigles développés -->
+                <p class="timeline__full" data-texte="journey.bts.full">Brevet de Technicien Supérieur Services Informatiques aux Organisations, option Solutions Logicielles et Applications Métiers</p>
+                <p class="timeline__place">
+                  <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+                  <span data-texte="journey.bts.place">CNED – formation à distance</span>
+                </p>
+                <!-- Présentation du BTS et de l'option : à écrire dans textes.js (clé journey.bts.text) -->
+                <div class="timeline__text is-placeholder" data-texte-html="journey.bts.text"></div>
+                <button class="btn-link" type="button" data-open-dialog="bts-dialog">
+                  <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg>
+                  <span data-texte="training.more">En savoir plus sur le BTS</span>
+                </button>
+              </div>
+            </li>
+
+            <!-- Baccalauréat -->
+            <li class="timeline__item reveal">
+              <p class="timeline__date"><time datetime="2026" data-texte="journey.bac.date">2026</time></p>
+              <span class="timeline__dot" aria-hidden="true"><svg class="icon"><use href="#i-award"></use></svg></span>
+              <div class="timeline__card">
+                <div class="timeline__top">
+                  <h3 class="timeline__title" data-texte="journey.bac.title">Baccalauréat général</h3>
+                  <span class="status status--done" data-texte="status.obtained">Obtenu</span>
+                </div>
+                <p class="timeline__full" data-texte="journey.bac.full">Spécialités Mathématiques et Physique-Chimie</p>
+                <p class="timeline__place">
+                  <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+                  <span data-texte="journey.bac.place">CNED – formation à distance</span>
+                </p>
+                <p class="timeline__mention is-placeholder" data-texte="journey.bac.mention"></p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 5. COMPÉTENCES ============================ -->
+    <section class="section" id="competences" aria-labelledby="competences-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow reveal" data-texte="skills.eyebrow">1re année</p>
+          <h2 class="section-title reveal" id="competences-title" data-texte="skills.title">Compétences</h2>
+        </header>
+
+        <!-- Légende des deux niveaux -->
+        <div class="skills-legend reveal">
+          <span data-texte="skills.legend">Niveaux :</span>
+          <span class="level level--used" data-texte="level.used">Utilisé en projet</span>
+          <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+        </div>
+
+        <!--
+          Compétences sur 2 colonnes :
+          - à gauche : la carte CV (aperçu cliquable + téléchargement) ;
+          - à droite : les cartes de compétences.
+          Fichiers : images/cv-apercu.jpg (1re page du CV en image) et cv.pdf (à la racine).
+        -->
+        <div class="skills-layout">
+          <aside class="cv-card reveal" id="cv" aria-labelledby="cv-title">
+            <div class="cv-card__head">
+              <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-download"></use></svg></span>
+              <h3 class="cv-card__title" id="cv-title" data-texte="cv.title">Mon CV</h3>
+            </div>
+
+            <button class="cv-preview" type="button" data-open-dialog="cv-dialog"
+                    aria-label="Agrandir l'aperçu du CV" data-texte-attr="aria-label:cv.zoomLabel">
+              <img class="cv-img" src="images/cv-apercu.jpg" data-fallback="images/cv-placeholder.svg"
+                   alt="" width="595" height="842" loading="lazy">
+              <span class="cv-preview__zoom" aria-hidden="true"><svg class="icon"><use href="#i-zoom"></use></svg></span>
+            </button>
+
+            <div class="cv-card__actions">
+              <a class="btn btn--primary btn--block" href="cv.pdf" download="CV-Dante-Ciancilla.pdf">
+                <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+                <span data-texte="skills.cv">Télécharger mon CV</span>
+              </a>
+              <button class="btn btn--ghost btn--block" type="button" data-open-dialog="cv-dialog">
+                <svg class="icon" aria-hidden="true"><use href="#i-zoom"></use></svg>
+                <span data-texte="cv.zoom">Agrandir</span>
+              </button>
+            </div>
+          </aside>
+
+          <!--
+            Pour changer le niveau d'une compétence, déplace-la dans
+            la bonne ligne (level--used ou level--learning).
+            Logos : Devicon (cdn.jsdelivr.net) et Simple Icons (cdn.simpleicons.org).
+            GLPI, MS Project, Active Directory et SQL n'ont pas de logo dans
+            ces bibliothèques : une icône générique les remplace.
+          -->
+          <div class="skills-grid">
+            <!-- Langages -->
+            <article class="skill-card reveal">
+              <div class="skill-card__head">
+                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-code"></use></svg></span>
+                <h3 class="skill-card__title" data-texte="cat.languages">Langages</h3>
+              </div>
+              <div class="skill-row">
+                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <ul class="chips">
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/csharp/csharp-original.svg" alt="Logo C#" width="22" height="22" loading="lazy">C#</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/python/python-original.svg" alt="Logo Python" width="22" height="22" loading="lazy">Python</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/java/java-original.svg" alt="Logo Java" width="22" height="22" loading="lazy">Java</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.simpleicons.org/luau" alt="Logo Luau" width="22" height="22" loading="lazy">Luau</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Web -->
+            <article class="skill-card reveal">
+              <div class="skill-card__head">
+                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-globe"></use></svg></span>
+                <h3 class="skill-card__title" data-texte="cat.web">Web</h3>
+              </div>
+              <div class="skill-row">
+                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <ul class="chips">
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/html5/html5-original.svg" alt="Logo HTML" width="22" height="22" loading="lazy">HTML</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/css3/css3-original.svg" alt="Logo CSS" width="22" height="22" loading="lazy">CSS</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/javascript/javascript-original.svg" alt="Logo JavaScript" width="22" height="22" loading="lazy">JavaScript</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/php/php-original.svg" alt="Logo PHP" width="22" height="22" loading="lazy">PHP</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/wordpress/wordpress-plain.svg" alt="Logo WordPress" width="22" height="22" loading="lazy">WordPress</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Bases de données -->
+            <article class="skill-card reveal">
+              <div class="skill-card__head">
+                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-database"></use></svg></span>
+                <h3 class="skill-card__title" data-texte="cat.db">Bases de données</h3>
+              </div>
+              <div class="skill-row">
+                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <ul class="chips">
+                  <li class="chip chip--logo"><span class="chip__logo" role="img" aria-label="Icône SQL"><svg class="icon"><use href="#i-database"></use></svg></span>SQL</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/postgresql/postgresql-original.svg" alt="Logo PostgreSQL" width="22" height="22" loading="lazy">PostgreSQL</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/mysql/mysql-original.svg" alt="Logo MySQL" width="22" height="22" loading="lazy">MySQL</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/mongodb/mongodb-original.svg" alt="Logo MongoDB" width="22" height="22" loading="lazy">MongoDB</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Outils -->
+            <article class="skill-card reveal">
+              <div class="skill-card__head">
+                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-wrench"></use></svg></span>
+                <h3 class="skill-card__title" data-texte="cat.tools">Outils</h3>
+              </div>
+              <div class="skill-row">
+                <span class="level level--used" data-texte="level.used">Utilisé en projet</span>
+                <ul class="chips">
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/github/github-original.svg" alt="Logo GitHub" width="22" height="22" loading="lazy">GitHub</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.simpleicons.org/robloxstudio" alt="Logo Roblox Studio" width="22" height="22" loading="lazy">Roblox Studio</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.simpleicons.org/discord" alt="Logo Discord" width="22" height="22" loading="lazy">Discord</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/netlify/netlify-original.svg" alt="Logo Netlify" width="22" height="22" loading="lazy">Netlify</li>
+                </ul>
+              </div>
+              <div class="skill-row">
+                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <ul class="chips">
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/git/git-original.svg" alt="Logo Git" width="22" height="22" loading="lazy">Git</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/visualstudio/visualstudio-original.svg" alt="Logo Visual Studio" width="22" height="22" loading="lazy">Visual Studio</li>
+                  <li class="chip chip--logo"><span class="chip__logo" role="img" aria-label="Icône GLPI"><svg class="icon"><use href="#i-server"></use></svg></span>GLPI</li>
+                  <li class="chip chip--logo"><span class="chip__logo" role="img" aria-label="Icône MS Project"><svg class="icon"><use href="#i-gantt"></use></svg></span>MS Project</li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- Systèmes et réseaux -->
+            <article class="skill-card reveal">
+              <div class="skill-card__head">
+                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-cpu"></use></svg></span>
+                <h3 class="skill-card__title" data-texte="cat.systems">Systèmes et réseaux</h3>
+              </div>
+              <div class="skill-row">
+                <span class="level level--learning" data-texte="level.learning">En cours d'acquisition</span>
+                <ul class="chips">
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/windows11/windows11-original.svg" alt="Logo Windows" width="22" height="22" loading="lazy">Windows</li>
+                  <li class="chip chip--logo"><img class="chip__logo" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/ubuntu/ubuntu-original.svg" alt="Logo Linux (Ubuntu)" width="22" height="22" loading="lazy">Linux (Ubuntu)</li>
+                  <li class="chip chip--logo"><span class="chip__logo" role="img" aria-label="Icône Active Directory"><svg class="icon"><use href="#i-network"></use></svg></span>Active Directory</li>
+                </ul>
+              </div>
+              <ul class="check-list check-list--spaced">
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span data-texte="skill.pc">Montage d'un PC</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span data-texte="skill.windows">Installation de Windows</span></li>
+              </ul>
+            </article>
+
+            <!-- Savoir-être -->
+            <article class="skill-card reveal">
+              <div class="skill-card__head">
+                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-users"></use></svg></span>
+                <h3 class="skill-card__title" data-texte="cat.soft">Savoir-être</h3>
+              </div>
+              <ul class="check-list">
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span data-texte="skill.autonomy">Autonomie</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span data-texte="skill.team">Travail en équipe</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span data-texte="skill.feedback">Écoute des retours</span></li>
+              </ul>
+            </article>
+
+            <!-- Langues -->
+            <article class="skill-card reveal">
+              <div class="skill-card__head">
+                <span class="skill-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-languages"></use></svg></span>
+                <h3 class="skill-card__title" data-texte="cat.langs">Langues</h3>
+              </div>
+              <ul class="lang-list">
+                <li><span data-texte="skill.english">Anglais</span><span class="lang-level">C1</span></li>
+                <li><span data-texte="skill.italian">Italien</span><span class="lang-level">A2</span></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 6. CONTACT ============================ -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow reveal" data-texte="contact.eyebrow">Échangeons</p>
+          <h2 class="section-title reveal" id="contact-title" data-texte="contact.title">Contact</h2>
+        </header>
+
+        <div class="contact">
+          <div class="contact__info">
+            <!-- Petit texte d'invitation : à écrire dans textes.js (clé contact.text) -->
+            <div class="contact__text reveal" data-texte-html="contact.text"></div>
+
+            <ul class="contact-list">
+              <li class="contact-item reveal">
+                <span class="contact-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-mail"></use></svg></span>
+                <div class="contact-item__body">
+                  <p class="contact-item__label" data-texte="contact.emailLabel">E-mail</p>
+                  <a class="contact-item__value" href="mailto:danteciancilla@gmail.com">danteciancilla@gmail.com</a>
+                </div>
+                <!-- Bouton « Copier » : copie l'adresse dans le presse-papiers -->
+                <button class="copy-btn" id="copy-email" type="button" data-copy="danteciancilla@gmail.com">
+                  <svg class="icon icon-copy" aria-hidden="true"><use href="#i-copy"></use></svg>
+                  <svg class="icon icon-done" aria-hidden="true"><use href="#i-check"></use></svg>
+                  <span class="copy-btn__label" data-texte="contact.copy">Copier</span>
+                </button>
+              </li>
+              <li class="contact-item reveal">
+                <span class="contact-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-phone"></use></svg></span>
+                <div class="contact-item__body">
+                  <p class="contact-item__label" data-texte="contact.phoneLabel">Téléphone</p>
+                  <!-- tel: ouvre l'appel sur un téléphone ; le numéro international commence par +33 -->
+                  <a class="contact-item__value" href="tel:+33782707239" data-texte="contact.phone">07 82 70 72 39</a>
+                </div>
+              </li>
+              <li class="contact-item reveal">
+                <span class="contact-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-linkedin"></use></svg></span>
+                <div class="contact-item__body">
+                  <p class="contact-item__label">LinkedIn</p>
+                  <a class="contact-item__value" href="https://www.linkedin.com/in/dante-ciancilla/" target="_blank" rel="noopener noreferrer">
+                    linkedin.com/in/dante-ciancilla<span class="sr-only" data-texte="link.newTab">(nouvel onglet)</span>
+                  </a>
+                </div>
+              </li>
+              <li class="contact-item reveal">
+                <span class="contact-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-github"></use></svg></span>
+                <div class="contact-item__body">
+                  <p class="contact-item__label">GitHub</p>
+                  <a class="contact-item__value" href="https://github.com/danteciancilla" target="_blank" rel="noopener noreferrer">
+                    github.com/danteciancilla<span class="sr-only" data-texte="link.newTab">(nouvel onglet)</span>
+                  </a>
+                </div>
+              </li>
+              <li class="contact-item reveal">
+                <span class="contact-item__icon" aria-hidden="true"><svg class="icon"><use href="#i-pin"></use></svg></span>
+                <div class="contact-item__body">
+                  <p class="contact-item__label" data-texte="contact.locationLabel">Localisation</p>
+                  <p class="contact-item__value" data-texte="contact.location">Sète (34200)</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!--
+            Formulaire de contact : envoyé avec Formspree (identifiant
+            FORMSPREE_ID en haut de script.js).
+            « novalidate » : c'est script.js qui vérifie les champs, pour
+            afficher des messages clairs.
+          -->
+          <form class="contact-form reveal" id="contact-form" novalidate>
+            <h3 class="contact-form__title" data-texte="form.title">Envoyer un message</h3>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-name" data-texte="form.name">Nom</label>
+                <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-error">
+                <p class="field__error" id="f-name-error"></p>
+              </div>
+              <div class="field">
+                <label for="f-email" data-texte="form.email">E-mail</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-error">
+                <p class="field__error" id="f-email-error"></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-subject" data-texte="form.subject">Objet</label>
+              <input id="f-subject" name="subject" type="text" required aria-describedby="f-subject-error">
+              <p class="field__error" id="f-subject-error"></p>
+            </div>
+            <div class="field">
+              <label for="f-message" data-texte="form.message">Message</label>
+              <textarea id="f-message" name="message" rows="6" required aria-describedby="f-message-error"></textarea>
+              <p class="field__error" id="f-message-error"></p>
+            </div>
+
+            <!-- Piège à robots : champ caché aux humains. S'il est rempli, le message n'est pas envoyé. -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="f-gotcha">Ne pas remplir</label>
+              <input id="f-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button class="btn btn--primary btn--block" type="submit">
+              <svg class="icon" aria-hidden="true"><use href="#i-send"></use></svg>
+              <span data-texte="form.send">Envoyer</span>
+            </button>
+            <p class="form-note">
+              <span data-texte="form.privacy">Vos données servent uniquement à vous répondre.</span>
+              <a href="mentions-legales.html" data-texte="form.privacyLink">En savoir plus</a>
+            </p>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ PIED DE PAGE ============================ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        © <span id="year">2026</span> Dante Ciancilla · <span data-texte="footer.text">Portfolio BTS SIO SLAM</span>
+        · <a class="footer-legal" href="mentions-legales.html" data-texte="footer.legal">Mentions légales et confidentialité</a>
+      </p>
+      <div class="footer-links">
+        <a class="icon-btn" href="https://www.linkedin.com/in/dante-ciancilla/" target="_blank" rel="noopener noreferrer"
+           aria-label="LinkedIn (nouvel onglet)" data-texte-attr="aria-label:hero.linkedinLabel">
+          <svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg>
+        </a>
+        <a class="icon-btn" href="https://github.com/danteciancilla" target="_blank" rel="noopener noreferrer"
+           aria-label="GitHub (nouvel onglet)" data-texte-attr="aria-label:hero.githubLabel">
+          <svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg>
+        </a>
+        <a class="icon-btn" href="mailto:danteciancilla@gmail.com"
+           aria-label="Envoyer un e-mail" data-texte-attr="aria-label:hero.emailLabel">
+          <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+        </a>
+        <a class="icon-btn" href="tel:+33782707239"
+           aria-label="Appeler le 07 82 70 72 39" data-texte-attr="aria-label:hero.phoneLabel">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bouton « retour en haut » (apparaît après un peu de défilement) -->
+  <a class="back-to-top" id="back-to-top" href="#accueil" aria-label="Retour en haut" data-texte-attr="aria-label:footer.top">
+    <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
+  </a>
+
+  <!-- Petit message temporaire (ex. « Adresse copiée ») -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Zone invisible lue par les lecteurs d'écran (ex. nombre de projets filtrés) -->
+  <p class="sr-only" id="announcer" aria-live="polite"></p>
+
+  <!-- Fenêtre « CV en grand » -->
+  <dialog class="dialog dialog--cv" id="cv-dialog" aria-labelledby="cv-dialog-title">
+    <div class="dialog__inner">
+      <div class="dialog__head">
+        <h2 class="dialog__title" id="cv-dialog-title" data-texte="cv.dialogTitle">CV de Dante Ciancilla</h2>
+        <a class="btn btn--primary btn--small" href="cv.pdf" download="CV-Dante-Ciancilla.pdf">
+          <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+          <span data-texte="cv.download">Télécharger (PDF)</span>
+        </a>
+        <button class="icon-btn" type="button" data-close-dialog aria-label="Fermer" data-texte-attr="aria-label:bts.close">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+      <div class="cv-full">
+        <img class="cv-img" src="images/cv-apercu.jpg" data-fallback="images/cv-placeholder.svg"
+             alt="CV de Dante Ciancilla" data-texte-attr="alt:cv.alt" width="595" height="842" loading="lazy">
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Fenêtre « En savoir plus sur le BTS » -->
+  <dialog class="dialog" id="bts-dialog" aria-labelledby="bts-title">
+    <div class="dialog__inner">
+      <div class="dialog__head">
+        <span class="info-card__icon" aria-hidden="true"><svg class="icon"><use href="#i-grad"></use></svg></span>
+        <h2 class="dialog__title" id="bts-title" data-texte="bts.title">BTS SIO – Option SLAM</h2>
+        <button class="icon-btn" type="button" data-close-dialog aria-label="Fermer" data-texte-attr="aria-label:bts.close">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+      <dl class="facts facts--dialog">
+        <div class="facts__row">
+          <dt>BTS SIO</dt>
+          <dd data-texte="bts.sio">Services Informatiques aux Organisations</dd>
+        </div>
+        <div class="facts__row">
+          <dt data-texte="bts.slamLabel">Option SLAM</dt>
+          <dd data-texte="bts.slam">Solutions Logicielles et Applications Métiers</dd>
+        </div>
+        <div class="facts__row">
+          <dt data-texte="bts.otherLabel">Autre option</dt>
+          <dd data-texte="bts.other">SISR – Solutions d'Infrastructure, Systèmes et Réseaux</dd>
+        </div>
+        <div class="facts__row">
+          <dt data-texte="bts.durationLabel">Durée</dt>
+          <dd data-texte="bts.duration">2 ans (2026 – 2028)</dd>
+        </div>
+        <div class="facts__row">
+          <dt data-texte="bts.schoolLabel">Établissement</dt>
+          <dd data-texte="bts.school">CNED – formation à distance</dd>
+        </div>
+      </dl>
+    </div>
+  </dialog>
+</body>
+</html>

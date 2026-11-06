@@ -1,0 +1,29 @@
+# Fichiers à ne pas publier sur GitHub
+
+# Notes personnelles et captures d'écran de travail
+notes/
+
+# Réglages de Claude Code
+.claude/
+
+# Fichiers créés automatiquement par Windows / macOS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Réglages des éditeurs de code
+.vscode/
+.idea/
+
+# Fichiers temporaires, sauvegardes, fichiers ouverts dans Word / LibreOffice
+*.tmp
+*.bak
+*.log
+~$*
+.~lock.*
+
+# Secrets : ne jamais publier (sécurité, au cas où)
+.env
+.env.*
+*.key
+*.pem

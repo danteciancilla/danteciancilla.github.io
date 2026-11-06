@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  realisation.html — Page de détail d'une réalisation (modèle unique)
+  ---------------------------------------------------------------------
+  Cette page sert pour TOUTES les réalisations. L'identifiant du projet
+  est dans l'adresse : realisation.html?id=dig-incremental
+  script.js lit cet identifiant, retrouve la réalisation dans
+  realisations.js et fabrique le contenu de la balise #realisation-root :
+  titre, date, statut, technologies, cadre de réalisation, description
+  détaillée, galerie de captures, liens, compétences du bloc 1 couvertes.
+  → Il n'y a rien à modifier ici pour ajouter une réalisation.
+  =====================================================================
+-->
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réalisation | Dante Ciancilla</title>
+  <meta name="description" content="Réalisation de Dante Ciancilla, étudiant en BTS SIO option SLAM au CNED.">
+  <meta name="author" content="Dante Ciancilla">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" id="theme-color" content="#0A0914">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Même petit script que sur la page d'accueil : thème (sombre par défaut) appliqué avant l'affichage -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add("js");
+
+      var theme = null;
+      try {
+        theme = localStorage.getItem("theme");
+      } catch (e) { /* localStorage bloqué : on garde le thème par défaut */ }
+
+      // Pas de choix mémorisé : le mode sombre est utilisé par défaut
+      if (theme !== "light" && theme !== "dark") {
+        theme = "dark";
+      }
+      root.setAttribute("data-theme", theme);
+
+      // Sécurité : si script.js ne se lance pas, on affiche quand même tout le contenu.
+      setTimeout(function () {
+        if (!root.classList.contains("js-ready")) {
+          root.classList.remove("js");
+        }
+      }, 4000);
+    })();
+  </script>
+  <script src="textes.js" defer></script>
+  <script src="competences-bloc1.js" defer></script>
+  <script src="realisations.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenu" data-texte="skip">Aller au contenu</a>
+
+  <!-- Icônes utilisées sur cette page -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="4"/><path d="M7.5 10.5v6M7.5 7.5v.01M11.5 16.5v-6M11.5 13a2.5 2.5 0 0 1 5 0v3.5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4V8z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" data-texte-attr="aria-label:logo.label" aria-label="Dante Ciancilla – retour à l'accueil">
+        <span class="logo__mark" aria-hidden="true">DC</span>
+        <span class="logo__text">Dante Ciancilla</span>
+      </a>
+      <div class="header-actions header-actions--end">
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Activer le mode clair">
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail" id="contenu">
+    <div class="container container--detail">
+      <a class="back-link" href="index.html#projets">
+        <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+        <span data-texte="detail.back">Retour aux réalisations</span>
+      </a>
+
+      <!-- Contenu fabriqué par script.js à partir de realisations.js -->
+      <article id="realisation-root" aria-live="polite"></article>
+      <noscript><p class="noscript-note">JavaScript est nécessaire pour afficher cette réalisation.</p></noscript>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        © <span id="year">2026</span> Dante Ciancilla · <span data-texte="footer.text">Portfolio BTS SIO SLAM</span>
+        · <a class="footer-legal" href="mentions-legales.html" data-texte="footer.legal">Mentions légales et confidentialité</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Fenêtre pour afficher une capture en grand -->
+  <dialog class="dialog dialog--cv lightbox" id="lightbox" aria-label="Capture" data-texte-attr="aria-label:detail.gallery">
+    <div class="dialog__inner">
+      <div class="dialog__head">
+        <p class="dialog__title lightbox__caption"></p>
+        <button class="icon-btn" type="button" data-close-dialog aria-label="Fermer" data-texte-attr="aria-label:bts.close">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+      <div class="cv-full lightbox__frame">
+        <img alt="">
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>
