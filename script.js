@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Les 4 catégories, dans l'ordre d'affichage
   const GROUPES = [
     { categorie: "perso",   grille: "projects-grid projects-grid--two" },
-    { categorie: "atelier", grille: "projects-grid", misEnAvant: true },
+    { categorie: "atelier", grille: "projects-grid projects-grid--two", misEnAvant: true },
     { categorie: "bloc1",   grille: "projects-grid" },
     { categorie: "bloc2",   grille: "projects-grid" }
   ];
@@ -421,6 +421,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // (ex. cbiocoiffure.fr) suivie de l'icône « nouvel onglet »
   function lienExterne(lien, afficherAdresse) {
     const libelle = t("link." + lien.type);
+    // Lien vers la section Contact du site : même onglet, icône e-mail
+    if (lien.type === "contact") {
+      const a = creer("a", "link-arrow", libelle);
+      a.href = lien.url;
+      a.appendChild(icone("mail"));
+      return a;
+    }
     if (!lien.url) {
       const vide = creer("span", "link-missing", libelle + " – " + t("link.missing"));
       return vide;

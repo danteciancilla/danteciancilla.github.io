@@ -131,6 +131,7 @@ const TEXTES = {
   "link.missing": "lien à venir",
   "link.newTab": "(nouvel onglet)",
   "link.linkedin": "Voir mon profil LinkedIn",
+  "link.contact": "Me contacter",
   "link.detailSoon": "Détail disponible une fois la réalisation terminée",
 
   "comp.label": "Compétences du bloc 1 couvertes",

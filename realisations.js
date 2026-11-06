@@ -33,7 +33,8 @@
    galerie       captures rangées dans images/<id>/ :
                  { fichier: "capture-1.jpg", legende: "…" }
                  Liste vide [] = images provisoires « Capture à venir ».
-   liens         { type: "site" | "play" | "github" | "linkedin" | "video" | "download", url: "…" }
+   liens         { type: "site" | "play" | "github" | "linkedin" | "video" | "download" | "contact", url: "…" }
+                 "contact" : lien vers la section Contact du site (url "index.html#contact").
                  Une url vide "" affiche « Lien à venir ».
    video         (facultatif) lien d'une vidéo (YouTube ou fichier .mp4).
                  "" = emplacement réservé « Vidéo à venir ».
@@ -187,7 +188,9 @@ const REALISATIONS = [
     description: "[À RÉDIGER PAR DANTE – FR] Description courte du stage",
     technologies: [],
     galerie: [],
-    liens: [],
+    liens: [
+      { type: "contact", url: "index.html#contact" }   // bouton « Me contacter »
+    ],
     competences: [],
     cadre: "[À RÉDIGER PAR DANTE – FR] Cadre de réalisation (4 à 5 semaines, développement d'applications)",
     descriptionDetaillee: "[À RÉDIGER PAR DANTE – FR] Description détaillée du stage",

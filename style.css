@@ -2833,3 +2833,9 @@ button[disabled] {
 .link-arrow--detail.is-disabled:hover {
   text-decoration: none;
 }
+
+/* Grille à 2 colonnes : une carte seule sur la dernière ligne prend toute
+   la largeur (ex. le stage sous les deux ateliers, en bandeau) */
+.projects-grid--two > .project:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
