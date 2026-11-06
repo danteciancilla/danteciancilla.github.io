@@ -59,7 +59,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=202611061948">
 
   <!--
     Petit script exécuté AVANT l'affichage de la page :
@@ -92,11 +92,13 @@
     })();
   </script>
 
-  <!-- "defer" : les scripts s'exécutent une fois toute la page lue -->
-  <script src="textes.js" defer></script>
-  <script src="competences-bloc1.js" defer></script>
-  <script src="realisations.js" defer></script>
-  <script src="script.js" defer></script>
+  <!-- "defer" : les scripts s'exécutent une fois toute la page lue.
+       "?v=…" : numéro de version, changé à chaque publication par publier.bat,
+       pour que le navigateur recharge les fichiers au lieu de garder l'ancienne copie. -->
+  <script src="textes.js?v=202611061948" defer></script>
+  <script src="competences-bloc1.js?v=202611061948" defer></script>
+  <script src="realisations.js?v=202611061948" defer></script>
+  <script src="script.js?v=202611061948" defer></script>
 
   <!-- Informations structurées pour Google (fiche « personne ») -->
   <script type="application/ld+json">

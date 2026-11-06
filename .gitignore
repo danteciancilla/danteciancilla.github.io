@@ -27,3 +27,6 @@ desktop.ini
 .env.*
 *.key
 *.pem
+
+# Outil local de publication (double-clic)
+publier.bat
