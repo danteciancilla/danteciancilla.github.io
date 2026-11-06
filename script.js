@@ -49,7 +49,7 @@
    5. Envoyer un message test depuis le site en ligne : il doit
       arriver dans ma boîte mail.
    ===================================================================== */
-const FORMSPREE_ID = "VOTRE_ID_FORMSPREE";
+const FORMSPREE_ID = "mpppewdy"; // formulaire « Portfolio » (https://formspree.io/f/mpppewdy)
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1137,6 +1137,9 @@ document.addEventListener("DOMContentLoaded", function () {
           champs.forEach((champ) => champ.setAttribute("aria-invalid", "false"));
           afficherStatut("form.success", "success");
         } else {
+          // Raison du refus donnée par Formspree, visible dans la console (F12)
+          const details = await reponse.json().catch(() => ({}));
+          console.warn("[Portfolio] Formspree a refusé l'envoi :", reponse.status, details);
           afficherStatut("form.error", "error");
         }
       } catch (erreur) {
