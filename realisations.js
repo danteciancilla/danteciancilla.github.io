@@ -25,6 +25,7 @@
    titre         nom du projet
    date          date ou période
    chiffres      (facultatif) chiffres clés affichés sur la vignette
+   accroche      (facultatif) première phrase de la vignette
    description   courte description de la vignette (<strong>mot</strong> = gras)
    technologies  liste des technologies
    miniature     (facultatif) image de la vignette, format 2:1 (ex. 1200 x 600)
@@ -45,12 +46,8 @@
    sections      (facultatif) autres parties : { titre, texte }
 
    PROJETS « À VENIR » (statut "upcoming")
-   La vignette n'affiche pas la description : elle affiche le
-   programme. Le lien « Voir le détail » est désactivé tant que le
-   statut est "upcoming".
-   programme     { contexte: "…",   → phrase seule (le contexte)
-                   activites: "…",  → « Au programme : … »
-                   texte: "…" }     → texte seul, sans titre
+   Le lien « Voir le détail » est désactivé tant que le statut est
+   "upcoming".
 
    EMPLACEMENTS [À RÉDIGER] / [À VÉRIFIER]
    Ils ne sont jamais affichés sur le site : le bloc est masqué.
@@ -84,7 +81,8 @@ const REALISATIONS = [
       { type: "play", url: "https://www.roblox.com/games/119840465122444" }
     ],
     cadre: "[À RÉDIGER PAR DANTE – FR] Cadre de réalisation (contexte, organisation, durée, seul ou en équipe)",
-    descriptionDetaillee: "[À RÉDIGER PAR DANTE – FR] Description détaillée du projet"
+    // Texte écrit par Dante
+    descriptionDetaillee: "<p>Dig Incremental est un jeu incrémental sur Roblox. Tu creuses une mine pour gagner des pièces. Avec ces pièces, tu achètes de meilleures pioches et des améliorations qui te font creuser plus vite et plus profond.</p><p>Le but est d’aller toujours plus loin : descendre plus bas, débloquer de nouveaux mondes et repartir de zéro avec des bonus permanents (renaissances et prestiges) pour progresser encore plus vite.</p>"
   },
 
   {
@@ -105,7 +103,8 @@ const REALISATIONS = [
       { type: "site", url: "https://cbiocoiffure.fr" }
     ],
     cadre: "[À RÉDIGER PAR DANTE – FR] Cadre de réalisation (contexte, organisation, durée, seul ou en équipe)",
-    descriptionDetaillee: "[À RÉDIGER PAR DANTE – FR] Description détaillée du projet"
+    // Texte écrit par Dante
+    descriptionDetaillee: "<p>J’ai réalisé ce site pour une coiffeuse à domicile. Elle voulait pouvoir présenter son travail, mais aussi gérer toute son activité au même endroit.</p><p>Le site permet de réserver en ligne et de payer par carte ou par PayPal, y compris en plusieurs fois. On y trouve aussi une boutique, des demandes de devis, des cartes cadeaux et un système de parrainage. Les confirmations, les rappels et les factures sont envoyés automatiquement par e-mail.</p><p>Un espace d’administration permet de tout gérer sans toucher au code : rendez-vous, tarifs, disponibilités, boutique et suivi de l’activité.</p><p>Le site est développé en HTML, CSS et JavaScript, avec une partie serveur en Node.js hébergée sur Netlify. Les paiements passent par Stripe et PayPal.</p>"
   },
 
   /* ============ ATELIERS DE PROFESSIONNALISATION ET STAGE ============ */
@@ -117,7 +116,9 @@ const REALISATIONS = [
     statut: "done",
     titre: "Développement professionnel – Atelier 1",
     date: "Nov. 2026",
-    description: "[À RÉDIGER PAR DANTE – FR] Description courte de l'atelier 1",
+    // Textes écrits par Dante
+    accroche: "Organiser ma façon d’apprendre et préparer mon parcours professionnel.",
+    description: "J’organise mon environnement de travail pour suivre ma formation à distance et je mets en place une veille informatique avec Pearltrees. Je crée aussi mon profil LinkedIn et je réfléchis à mon projet professionnel avec une carte mentale sur MindMup.",
     technologies: ["LinkedIn", "Pearltrees", "MindMup", "LibreOffice"],
     galerie: [],
     liens: [
@@ -135,13 +136,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Atelier 2 – MediaTek86",
     date: "Mai 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      contexte: "Un réseau de médiathèques qui a besoin d'une application pour gérer son personnel",
-      activites: "une application de bureau en C#, en 6 étapes : base de données MySQL, architecture MVC, documentation technique, fonctionnalités, vidéo de documentation utilisateur, déploiement"
-    },
-    // EXEMPLE IA – à réécrire
-    description: "Atelier de professionnalisation : développement d'une <strong>application de bureau</strong> en C# pour gérer le personnel d'une médiathèque, avec <strong>accès authentifié</strong>, architecture MVC et base de données MySQL.",
+    // Textes écrits par Dante
+    accroche: "Un réseau de médiathèques a besoin d’une application pour gérer son personnel.",
+    description: "Je développe une application de bureau en C#, en six étapes : la base de données MySQL, l’architecture MVC, la documentation technique, les fonctionnalités, une vidéo qui explique comment utiliser l’application, puis le déploiement.",
     technologies: ["C#", "MySQL", "MVC", "GitHub"],
     galerie: [],
     liens: [
@@ -185,10 +182,8 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Stage de 1re année",
     date: "Entre mai et août 2027",
-    // Texte donné par Dante
-    programme: {
-      texte: "Stage de 4 à 5 semaines en développement d'applications."
-    },
+    // Textes écrits par Dante
+    accroche: "Un stage de 4 à 5 semaines en entreprise, dans le développement d’applications.",
     description: "[À RÉDIGER PAR DANTE – FR] Description courte du stage",
     technologies: [],
     galerie: [],
@@ -220,13 +215,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Application de bureau en C#",
     date: "Nov. – déc. 2026",
-    // Programme : texte donné par Dante
-    programme: {
-      contexte: "Corriger et faire évoluer une application existante",
-      activites: "bases de la programmation, débogage, interface graphique et programmation événementielle, puis programmation objet, revue de code sur GitHub"
-    },
-    // EXEMPLE IA – à réécrire
-    description: "Développement d'une <strong>application de bureau</strong> en C# avec Visual Studio, avec un suivi du code sur GitHub.",
+    // Textes écrits par Dante
+    accroche: "Reprendre une application qui existe déjà pour la corriger et l’améliorer.",
+    description: "Je vais revoir les bases de la programmation et apprendre à déboguer, à créer une interface graphique et à gérer les événements. Ensuite, je passerai à la programmation objet, avec une revue de code sur GitHub.",
     technologies: ["C#", "Visual Studio", "GitHub"],
     galerie: [],
     liens: [],
@@ -241,12 +232,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Gestion du patrimoine informatique d'un lycée",
     date: "Déc. 2026 – janv. 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      contexte: "Le parc informatique d'un lycée",
-      activites: "inventorier le matériel avec un logiciel de gestion de parc, mettre en place des partages de fichiers et des niveaux d'accès, appliquer des normes, gérer des sauvegardes"
-    },
-    description: "[À RÉDIGER PAR DANTE – FR] Description courte",
+    // Textes écrits par Dante
+    accroche: "Gérer le matériel informatique d’un lycée.",
+    description: "Il faudra faire l’inventaire du matériel avec un logiciel de gestion de parc, mettre en place des partages de fichiers avec différents niveaux d’accès, appliquer des normes et gérer les sauvegardes.",
     technologies: [
       "Gestion de parc",
       "Partages de fichiers",
@@ -266,12 +254,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Évolution du parc et du réseau d'un lycée",
     date: "Janv. – févr. 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      contexte: "Le réseau du même lycée",
-      activites: "installer des machines virtuelles Windows 11 et Ubuntu, intégrer des postes dans un domaine Active Directory, diagnostiquer des pannes, gérer les droits d'accès, faire évoluer l'architecture réseau"
-    },
-    description: "[À RÉDIGER PAR DANTE – FR] Description courte",
+    // Textes écrits par Dante
+    accroche: "Faire évoluer le réseau de ce même lycée.",
+    description: "J’installerai des machines virtuelles sous Windows 11 et Ubuntu, j’ajouterai des postes dans un domaine Active Directory et je diagnostiquerai des pannes. Je devrai aussi gérer les droits d’accès et faire évoluer l’architecture du réseau.",
     technologies: [
       "Windows 11", "Ubuntu", "Active Directory",
       "Machines virtuelles"
@@ -289,13 +274,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Sites web",
     date: "Févr. 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      contexte: "La refonte d'un site de vente en ligne",
-      activites: "pages en HTML et CSS, interactivité en JavaScript, partie serveur en PHP, site sous WordPress, conformité RGPD, référencement, mise en ligne"
-    },
-    // EXEMPLE IA – à réécrire
-    description: "Création d'un <strong>site de vente en ligne</strong> avec WordPress, personnalisé en HTML, CSS, JavaScript et PHP.",
+    // Textes écrits par Dante
+    accroche: "Refaire un site de vente en ligne.",
+    description: "Je vais créer les pages en HTML et CSS, ajouter de l’interactivité en JavaScript et gérer la partie serveur en PHP. Je travaillerai aussi sur WordPress, la conformité RGPD, le référencement et la mise en ligne du site.",
     technologies: [
       "HTML", "CSS", "JavaScript", "PHP", "WordPress",
       "RGPD",
@@ -314,12 +295,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Gestion de projet",
     date: "Févr. 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      contexte: "Un projet de développement",
-      activites: "planifier un projet avec MS Project (découpage des tâches, ressources, coûts), travailler en méthode Agile, gérer les versions avec Git (branches, conflits)"
-    },
-    description: "[À RÉDIGER PAR DANTE – FR] Description courte",
+    // Textes écrits par Dante
+    accroche: "Organiser un projet de développement.",
+    description: "Le but est de planifier le projet avec MS Project (découpage des tâches, ressources, coûts), de travailler en méthode Agile et de gérer les versions avec Git, notamment les branches et les conflits.",
     technologies: [
       "MS Project",
       "Méthode Agile",
@@ -338,12 +316,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Mise à disposition d'un service",
     date: "Mars 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      contexte: "Le déploiement d'un outil de gestion de parc (GLPI)",
-      activites: "installer un équipement, préparer un environnement de test, déployer et tester GLPI, rédiger les documentations technique et utilisateur"
-    },
-    description: "[À RÉDIGER PAR DANTE – FR] Description courte",
+    // Textes écrits par Dante
+    accroche: "Déployer GLPI, un outil de gestion de parc.",
+    description: "Je vais installer un équipement, préparer un environnement de test, puis déployer et tester GLPI. Je rédigerai ensuite la documentation technique et la documentation utilisateur.",
     technologies: [
       "GLPI",
       "Pré-production",
@@ -364,12 +339,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Jeu 2D",
     date: "Mars 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      activites: "modéliser l'application, programmer un jeu en programmation objet (joueurs, murs, déplacements, combats), corriger les erreurs et écrire des tests unitaires"
-    },
-    // EXEMPLE IA – à réécrire
-    description: "Programmation d'un <strong>jeu en 2D</strong> en Java pour approfondir la programmation orientée objet.",
+    // Textes écrits par Dante
+    accroche: "Créer un jeu en 2D.",
+    description: "Je vais modéliser l’application, puis programmer le jeu en programmation objet (joueurs, murs, déplacements, combats). Je devrai aussi corriger les erreurs et écrire des tests unitaires.",
     technologies: ["Java"],
     galerie: [],
     liens: [],
@@ -384,12 +356,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Application de gestion des habilitations",
     date: "Mars 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      activites: "créer une base de données et une application en C# qui s'y connecte, avec une authentification sécurisée"
-    },
-    // EXEMPLE IA – à réécrire
-    description: "Application en C# pour <strong>gérer les habilitations</strong>, c'est-à-dire les droits d'accès des utilisateurs, avec une base de données SQL.",
+    // Textes écrits par Dante
+    accroche: "Gérer les accès des utilisateurs à une application.",
+    description: "Il s’agit de créer une base de données et une application en C# qui s’y connecte, avec une authentification sécurisée.",
     technologies: ["C#", "SQL"],
     galerie: [],
     liens: [],
@@ -404,12 +373,9 @@ const REALISATIONS = [
     statut: "upcoming",
     titre: "Bases de données",
     date: "Avr. 2027",
-    // Programme : texte donné par Dante
-    programme: {
-      activites: "analyser et interroger une base PostgreSQL avec des requêtes SQL, concevoir une base (modélisation MCD et MLD), découvrir le NoSQL avec MongoDB"
-    },
-    // EXEMPLE IA – à réécrire
-    description: "Conception et interrogation de <strong>bases de données</strong> relationnelles avec PostgreSQL, et découverte du NoSQL avec MongoDB.",
+    // Textes écrits par Dante
+    accroche: "Concevoir et interroger des bases de données.",
+    description: "J’apprendrai à analyser et interroger une base PostgreSQL avec des requêtes SQL et à concevoir une base de données (modèles MCD et MLD). Je découvrirai aussi le NoSQL avec MongoDB.",
     technologies: ["PostgreSQL", "MongoDB"],
     galerie: [],
     liens: [],

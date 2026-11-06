@@ -263,27 +263,6 @@ button {
   margin-bottom: clamp(28px, 4vw, 40px);
 }
 
-/* Petit sur-titre en majuscules au-dessus des titres */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-strong);
-}
-
-.eyebrow::before {
-  content: "";
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--accent);
-}
-
 .section-title {
   font-size: clamp(2rem, 4.2vw, 2.75rem);
   font-weight: 800;
@@ -2760,23 +2739,15 @@ button[disabled] {
 
 
 /* =====================================================================
-   22. PROJETS « À VENIR » : PÉRIODE PRÉVUE, PROGRAMME, LIEN DÉSACTIVÉ
+   22. VIGNETTES : ACCROCHE, PROJETS « À VENIR », LIEN DÉSACTIVÉ
    ===================================================================== */
-.planned {
-  display: grid;
-  gap: 8px;
-}
 
-/* « Contexte : … » et « Au programme : … » */
-.planned__line {
-  color: var(--text-2);
-  font-size: 0.9rem;
-  line-height: 1.55;
-}
-
-.planned__line strong {
+/* Accroche : première phrase de la vignette, un peu plus marquée */
+.project__accroche {
   color: var(--text);
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 /* Carte « À venir » : pas cliquable, donc elle ne monte pas au survol */
@@ -2804,6 +2775,10 @@ button[disabled] {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
+}
+
+.detail__planned .project__desc {
+  margin-top: 8px;
 }
 
 
@@ -2842,4 +2817,9 @@ button[disabled] {
 /* Noms longs (Systèmes et réseaux) : chaque logo garde sa largeur naturelle */
 .skill-card .chips--auto .chip--logo {
   flex: 0 0 auto;
+}
+
+/* Page de détail : adresse du lien affichée (peut être longue sur téléphone) */
+.link-arrow--url {
+  overflow-wrap: anywhere;
 }

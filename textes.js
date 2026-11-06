@@ -44,7 +44,6 @@ const TEXTES = {
   "theme.toLight": "Activer le mode clair",
 
   // --- 1. Accueil ---
-  "hero.eyebrow": "Portfolio",
   "hero.role": "Étudiant en informatique, développement d'applications",
   "hero.sub": "1re année BTS SIO option SLAM · CNED",
   // Texte écrit par Dante
@@ -68,7 +67,6 @@ const TEXTES = {
   "stats.english": "Anglais",
 
   // --- 2. Profil ---
-  "profile.eyebrow": "À propos",
   "profile.title": "Profil",
   // Ma présentation LinkedIn (écrite par moi), mise en forme avec du gras
   "profile.text": "<p>Étudiant en 1re année de <strong>BTS SIO option SLAM</strong> au CNED, je recherche un <strong>stage de 4 à 5 semaines</strong> en développement entre mai et août 2027, à Sète ou à Montpellier.</p><p>Venu au code par le jeu vidéo, j'ai co-créé un <strong>jeu Roblox</strong> qui approche les 2 000 visites, et réalisé le <strong>site professionnel d'une coiffeuse à domicile</strong>.</p><p>Scolarisé à distance depuis la 4e, je suis <strong>autonome</strong>, à l'aise en anglais (C1) et j'apprécie les retours francs.</p>",
@@ -100,7 +98,6 @@ const TEXTES = {
   "bts.close": "Fermer",
 
   // --- 3. Réalisations ---
-  "projects.eyebrow": "Projets",
   "projects.title": "Réalisations professionnelles",
   "projects.countOne": "1 réalisation affichée",
   "projects.countMany": "{n} réalisations affichées",
@@ -136,8 +133,6 @@ const TEXTES = {
   "link.linkedin": "Voir mon profil LinkedIn",
   "link.detailSoon": "Détail disponible une fois la réalisation terminée",
 
-  // Vignettes des projets « À venir »
-  "planned.program": "Au programme :",
   "comp.label": "Compétences du bloc 1 couvertes",
 
 
@@ -159,7 +154,6 @@ const TEXTES = {
   "detail.noSkills": "Aucune compétence du bloc 1 renseignée pour l'instant.",
 
   // --- 4. Parcours ---
-  "journey.eyebrow": "Formation",
   "journey.title": "Parcours",
   "journey.sub": "Du plus récent au plus ancien",
   "journey.intern.date": "Entre mai et août 2027",
@@ -177,7 +171,6 @@ const TEXTES = {
   "journey.bac.mention": "[À VÉRIFIER PAR DANTE] Mention éventuelle (à indiquer, ou à supprimer s'il n'y en a pas)",
 
   // --- 5. Compétences ---
-  "skills.eyebrow": "1re année",
   "skills.title": "Compétences",
   "skills.legend": "Niveaux :",
   "skills.cv": "Télécharger mon CV",
@@ -207,10 +200,9 @@ const TEXTES = {
   "cv.alt": "CV de Dante Ciancilla",
 
   // --- 6. Contact ---
-  "contact.eyebrow": "Échangeons",
   "contact.title": "Contact",
   // EXEMPLE IA – à réécrire
-  "contact.text": "Une question, une proposition de <strong>stage</strong> ou un projet ? N'hésitez pas à m'écrire, je vous répondrai avec plaisir.",
+  "contact.text": "Si vous avez une question, une proposition de <strong>stage</strong> ou un projet, n'hésitez pas à m'écrire, je vous répondrai avec plaisir.",
   "contact.emailLabel": "E-mail",
   "contact.copy": "Copier",
   "contact.copied": "Copié !",

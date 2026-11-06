@@ -363,22 +363,19 @@ document.addEventListener("DOMContentLoaded", function () {
     return projet.statut === "upcoming";
   }
 
-  // Ligne « Au programme : … »
-  function lignePlan(libelle, texte) {
-    const ligne = creer("p", "planned__line");
-    ligne.append(creer("strong", "", libelle + " "), document.createTextNode(texte));
-    return ligne;
-  }
-
-  // Bloc d'un projet « À venir » : le programme (champ « programme ») à la place de la description.
-  // La période est déjà affichée en haut de la vignette.
-  function blocPrevu(projet, classe) {
-    const bloc = creer("div", "planned " + (classe || ""));
-    const programme = projet.programme || {};
-    if (estRedige(programme.contexte)) bloc.appendChild(creer("p", "planned__line", programme.contexte));
-    if (estRedige(programme.activites)) bloc.appendChild(lignePlan(t("planned.program"), programme.activites));
-    if (estRedige(programme.texte)) bloc.appendChild(creer("p", "planned__line", programme.texte));
-    return bloc;
+  // Texte d'une réalisation : l'accroche (première phrase) puis la description.
+  // Un emplacement [À RÉDIGER] n'est pas affiché ; il est signalé dans la
+  // console, sauf pour un projet « À venir ».
+  function ajouterResume(parent, projet) {
+    const ou = (champ) => (estAVenir(projet) ? null : "realisations.js → " + projet.id + " → " + champ);
+    if (estRedige(projet.accroche, ou("accroche"))) {
+      parent.appendChild(creer("p", "project__accroche", projet.accroche));
+    }
+    if (estRedige(projet.description, ou("description"))) {
+      const description = creer("div", "project__desc");
+      description.innerHTML = projet.description; // autorise <strong>
+      parent.appendChild(description);
+    }
   }
 
   // Codes courts des compétences couvertes (ex. ["B1.3", "B1.5"])
@@ -420,19 +417,32 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Lien externe (site, jeu, GitHub, vidéo…) ; s'il n'a pas d'adresse : « Lien à venir »
-  function lienExterne(lien) {
+  // Avec « afficherAdresse » (page de détail) : on écrit l'adresse du lien
+  // (ex. cbiocoiffure.fr) suivie de l'icône « nouvel onglet »
+  function lienExterne(lien, afficherAdresse) {
     const libelle = t("link." + lien.type);
     if (!lien.url) {
       const vide = creer("span", "link-missing", libelle + " – " + t("link.missing"));
       return vide;
     }
-    const a = creer("a", "link-arrow");
+    const a = creer("a", "link-arrow" + (afficherAdresse ? " link-arrow--url" : ""));
     a.href = lien.url;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
-    a.append(creer("span", "", libelle), creer("span", "sr-only", t("link.newTab")));
-    a.appendChild(icone(lien.type === "github" || lien.type === "linkedin" ? lien.type : "external"));
+    if (afficherAdresse) {
+      a.title = libelle;
+      a.append(creer("span", "", adresseLisible(lien.url)), creer("span", "sr-only", t("link.newTab")));
+      a.appendChild(icone("external"));
+    } else {
+      a.append(creer("span", "", libelle), creer("span", "sr-only", t("link.newTab")));
+      a.appendChild(icone(lien.type === "github" || lien.type === "linkedin" ? lien.type : "external"));
+    }
     return a;
+  }
+
+  // Adresse plus lisible : sans « https:// » ni « / » à la fin
+  function adresseLisible(url) {
+    return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
   }
 
   // Fabrique une vignette
@@ -478,14 +488,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (projet.chiffres) corps.appendChild(creer("p", "project__stats", projet.chiffres));
 
-    if (aVenir) {
-      // « Réalisation prévue … » + programme, à la place de la description
-      corps.appendChild(blocPrevu(projet));
-    } else if (estRedige(projet.description, "realisations.js → " + projet.id + " → description")) {
-      const description = creer("div", "project__desc");
-      description.innerHTML = projet.description;
-      corps.appendChild(description);
-    }
+    ajouterResume(corps, projet);
 
     if (projet.technologies && projet.technologies.length) corps.appendChild(listeTags(projet.technologies));
     if (compteDansLeBloc1(projet) && codesCompetences(projet).length) corps.appendChild(listeBadges(projet));
@@ -647,8 +650,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const aVenir = estAVenir(projet);
     const ou = (champ) => (aVenir ? null : "realisations.js → " + projet.id + " → " + champ);
 
-    // --- En-tête : catégorie, titre, statut, date, technologies ---
-    detailRoot.appendChild(creer("p", "eyebrow", t("group." + projet.categorie + ".title")));
+    // --- En-tête : titre, statut, date, technologies ---
     detailRoot.appendChild(creer("h1", "detail__title", projet.titre));
 
     const meta = creer("div", "detail__meta");
@@ -665,8 +667,12 @@ document.addEventListener("DOMContentLoaded", function () {
       detailRoot.appendChild(tags);
     }
 
-    // --- Projet « À venir » : période prévue et programme ---
-    if (aVenir) detailRoot.appendChild(blocPrevu(projet, "detail__planned"));
+    // --- Projet « À venir » : accroche et description (pas encore de description détaillée) ---
+    if (aVenir) {
+      const resume = creer("div", "detail__planned");
+      ajouterResume(resume, projet);
+      detailRoot.appendChild(resume);
+    }
 
     // --- Cadre de réalisation et description détaillée ---
     ajouter(detailRoot, sectionTexte(t("detail.frame"), projet.cadre, ou("cadre")));
@@ -762,7 +768,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sectionLiens.appendChild(creer("h2", "", t("detail.links")));
     if (projet.liens && projet.liens.length) {
       const liste = creer("div", "detail__links");
-      projet.liens.forEach((l) => liste.appendChild(lienExterne(l)));
+      projet.liens.forEach((l) => liste.appendChild(lienExterne(l, true)));
       sectionLiens.appendChild(liste);
     } else {
       sectionLiens.appendChild(creer("p", "detail__empty", t("detail.noLinks")));
