@@ -25,7 +25,7 @@
    21. Mentions légales
    22. Vignettes : accroche, projets « À venir »
    24. Profil et compétences : agencement
-   25. Fond du site : lumière, halos, points et grain
+   25. Fond du site : lumière, halos et grain
    ===================================================================== */
 
 
@@ -588,6 +588,19 @@ button {
   isolation: isolate; /* les décorations (z-index -1) restent derrière le contenu de l'accueil */
   overflow: hidden;
   padding: calc(var(--header-h) + clamp(40px, 7vw, 88px)) 0 clamp(32px, 4vw, 48px);
+}
+
+/* Décoration : grille de points qui s'estompe sur les bords */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 30%, transparent 78%);
+  pointer-events: none;
 }
 
 /* Décoration : halo cyan très léger en haut à droite */
@@ -2826,14 +2839,15 @@ button[disabled] {
 
 
 /* =====================================================================
-   25. FOND DU SITE : LUMIÈRE, HALOS, POINTS ET GRAIN
-   Quatre calques fixes, placés derrière tout le contenu de la page :
+   25. FOND DU SITE : LUMIÈRE, HALOS ET GRAIN
+   Trois calques placés derrière tout le contenu de la page :
+   - body::before : une lumière en haut de la page et des halos de
+     couleur sur les côtés, semés tout le long de la page. Ils défilent
+     avec la page : on en découvre de nouveaux en descendant ;
    - html::before : un léger grain, comme sur une photo argentique ;
-   - html::after  : des petits points semés au hasard sur tout le site ;
-   - body::before : une lumière qui tombe du haut de l'écran et deux
-     halos de couleur sur les côtés, qui bougent très lentement ;
    - body::after  : les bords de l'écran un peu assombris (vignette).
-   « position: fixed » : le fond reste en place quand on fait défiler.
+   Le grain et la vignette sont fixes (« position: fixed ») : ils
+   restent en place quand on fait défiler.
    ===================================================================== */
 :root {
   --lumiere: rgba(8, 145, 178, 0.22);    /* lumière du haut (cyan) */
@@ -2841,7 +2855,6 @@ button[disabled] {
   --halo-2: rgba(20, 184, 166, 0.14);    /* halo à droite (turquoise) */
   --vignette: rgba(31, 58, 95, 0.07);    /* bords assombris */
   --grain-opacite: 0.05;
-  --points: rgba(31, 58, 95, 0.30);      /* points semés sur le fond */
 }
 
 [data-theme="dark"] {
@@ -2850,29 +2863,36 @@ button[disabled] {
   --halo-2: rgba(219, 39, 119, 0.15);    /* magenta */
   --vignette: rgba(0, 0, 0, 0.45);
   --grain-opacite: 0.07;
-  --points: rgba(238, 235, 250, 0.22);
+}
+
+/* Le calque des halos se place par rapport à body (toute la page) */
+body {
+  position: relative;
 }
 
 body::before,
 body::after {
   content: "";
-  position: fixed;
   z-index: -1;            /* derrière le contenu */
   pointer-events: none;   /* ne gêne pas les clics */
 }
 
-/* Lumière du haut + halos de couleur */
+/* Lumière du haut + halos de couleur, sur toute la hauteur de la page.
+   Chaque halo est dessiné dans une « tuile » répétée vers le bas (repeat-y).
+   Les deux tuiles n'ont pas la même hauteur (1400 px et 1900 px) :
+   les halos de gauche et de droite ne reviennent pas au même rythme. */
 body::before {
-  inset: -12%;            /* plus grand que l'écran : les bords ne se voient pas quand il bouge */
+  position: absolute;
+  inset: 0;               /* toute la page, pas seulement l'écran */
   background:
-    radial-gradient(50% 30% at 50% 14%, var(--lumiere), transparent 70%),
-    radial-gradient(35% 35% at 6% 55%, var(--halo-1), transparent 70%),
-    radial-gradient(35% 35% at 96% 75%, var(--halo-2), transparent 70%);
-  animation: fond-halos 32s ease-in-out infinite alternate;
+    radial-gradient(50vw 300px at 50% 90px, var(--lumiere), transparent 70%) no-repeat,
+    radial-gradient(520px 420px at 4% 50%, var(--halo-1), transparent 70%) 0 -200px / 100% 1400px repeat-y,
+    radial-gradient(520px 420px at 96% 50%, var(--halo-2), transparent 70%) 0 -250px / 100% 1900px repeat-y;
 }
 
-/* Vignette : les bords de l'écran légèrement plus sombres */
+/* Vignette : les bords de l'écran légèrement plus sombres (fixe) */
 body::after {
+  position: fixed;
   inset: 0;
   background: radial-gradient(ellipse 120% 95% at 50% 40%, transparent 55%, var(--vignette) 100%);
 }
@@ -2886,36 +2906,4 @@ html::before {
   pointer-events: none;
   opacity: var(--grain-opacite);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-}
-
-/* Points semés au hasard sur tout le site.
-   Deux images SVG de points (placés au hasard une fois pour toutes) sont
-   répétées l'une sur l'autre. Elles n'ont pas la même taille (347 px et
-   523 px) : le motif ne se répète pas de façon visible.
-   Les images servent de « pochoir » (mask) : la couleur --points ne
-   s'affiche que là où il y a un point, donc elle suit le thème. */
-html::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-color: var(--points);
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='347' height='347'%3E%3Ccircle cx='165.7' cy='333.7' r='1' fill-opacity='0.57'/%3E%3Ccircle cx='188.7' cy='175.2' r='1.4' fill-opacity='0.90'/%3E%3Ccircle cx='91.1' cy='226.9' r='1.4' fill-opacity='0.66'/%3E%3Ccircle cx='233.7' cy='201.4' r='1' fill-opacity='0.85'/%3E%3Ccircle cx='26.1' cy='295.6' r='1.4' fill-opacity='0.91'/%3E%3Ccircle cx='237.8' cy='145.8' r='1.4' fill-opacity='0.98'/%3E%3Ccircle cx='127.8' cy='296.6' r='1' fill-opacity='0.80'/%3E%3Ccircle cx='29.4' cy='257.5' r='1' fill-opacity='0.86'/%3E%3Ccircle cx='242.7' cy='272.4' r='1.4' fill-opacity='0.84'/%3E%3Ccircle cx='149.4' cy='148.5' r='1' fill-opacity='0.93'/%3E%3Ccircle cx='7.0' cy='103.7' r='1' fill-opacity='0.78'/%3E%3Ccircle cx='262.5' cy='189.5' r='1' fill-opacity='0.95'/%3E%3Ccircle cx='234.0' cy='4.8' r='1' fill-opacity='0.78'/%3E%3Ccircle cx='91.7' cy='9.0' r='1' fill-opacity='0.54'/%3E%3Ccircle cx='148.9' cy='104.2' r='1' fill-opacity='0.57'/%3E%3Ccircle cx='299.2' cy='262.9' r='1' fill-opacity='0.74'/%3E%3Ccircle cx='335.0' cy='14.4' r='1' fill-opacity='0.88'/%3E%3Ccircle cx='190.5' cy='300.8' r='1.4' fill-opacity='0.70'/%3E%3Ccircle cx='198.4' cy='113.2' r='1.9' fill-opacity='0.63'/%3E%3Ccircle cx='177.4' cy='267.2' r='1' fill-opacity='0.90'/%3E%3Ccircle cx='266.2' cy='85.8' r='1' fill-opacity='0.83'/%3E%3Ccircle cx='89.3' cy='181.9' r='1' fill-opacity='0.59'/%3E%3Ccircle cx='31.2' cy='90.7' r='1.9' fill-opacity='0.79'/%3E%3Ccircle cx='299.2' cy='50.8' r='1' fill-opacity='0.82'/%3E%3Ccircle cx='39.0' cy='117.8' r='1' fill-opacity='0.80'/%3E%3Ccircle cx='99.8' cy='82.1' r='1' fill-opacity='0.90'/%3E%3Ccircle cx='82.6' cy='280.2' r='1' fill-opacity='0.52'/%3E%3Ccircle cx='247.6' cy='60.9' r='1' fill-opacity='0.59'/%3E%3Ccircle cx='47.2' cy='143.9' r='1.4' fill-opacity='0.80'/%3E%3Ccircle cx='178.1' cy='149.8' r='1' fill-opacity='0.64'/%3E%3Ccircle cx='154.9' cy='35.9' r='1' fill-opacity='0.76'/%3E%3Ccircle cx='300.0' cy='138.3' r='1.4' fill-opacity='0.46'/%3E%3Ccircle cx='55.7' cy='249.9' r='1.4' fill-opacity='0.75'/%3E%3Ccircle cx='73.6' cy='331.6' r='1.4' fill-opacity='0.95'/%3E%3Ccircle cx='59.1' cy='293.0' r='1' fill-opacity='0.64'/%3E%3Ccircle cx='95.6' cy='41.2' r='1' fill-opacity='0.98'/%3E%3Ccircle cx='109.1' cy='126.2' r='1' fill-opacity='0.97'/%3E%3Ccircle cx='26.1' cy='160.6' r='1.4' fill-opacity='0.97'/%3E%3Ccircle cx='6.9' cy='54.7' r='1' fill-opacity='0.53'/%3E%3Ccircle cx='308.8' cy='308.0' r='1.4' fill-opacity='0.66'/%3E%3Ccircle cx='138.0' cy='67.0' r='1' fill-opacity='0.78'/%3E%3Ccircle cx='179.5' cy='56.0' r='1' fill-opacity='0.47'/%3E%3Ccircle cx='26.1' cy='193.7' r='1' fill-opacity='0.50'/%3E%3Ccircle cx='4.5' cy='131.6' r='1' fill-opacity='0.92'/%3E%3Ccircle cx='337.1' cy='158.6' r='1' fill-opacity='0.57'/%3E%3Ccircle cx='51.6' cy='46.7' r='1.4' fill-opacity='0.81'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='523' height='523'%3E%3Ccircle cx='204.4' cy='224.8' r='0.9' fill-opacity='0.80'/%3E%3Ccircle cx='65.7' cy='315.7' r='0.9' fill-opacity='0.88'/%3E%3Ccircle cx='16.3' cy='262.7' r='0.9' fill-opacity='0.72'/%3E%3Ccircle cx='36.6' cy='345.8' r='0.9' fill-opacity='0.72'/%3E%3Ccircle cx='342.9' cy='90.9' r='0.9' fill-opacity='0.61'/%3E%3Ccircle cx='260.6' cy='150.1' r='0.9' fill-opacity='0.64'/%3E%3Ccircle cx='311.5' cy='204.0' r='0.9' fill-opacity='0.80'/%3E%3Ccircle cx='186.8' cy='519.8' r='0.9' fill-opacity='0.75'/%3E%3Ccircle cx='403.2' cy='452.1' r='1.6' fill-opacity='0.58'/%3E%3Ccircle cx='55.0' cy='228.5' r='0.9' fill-opacity='0.82'/%3E%3Ccircle cx='268.3' cy='81.4' r='0.9' fill-opacity='0.69'/%3E%3Ccircle cx='343.0' cy='225.4' r='0.9' fill-opacity='0.71'/%3E%3Ccircle cx='64.4' cy='135.0' r='0.9' fill-opacity='0.90'/%3E%3Ccircle cx='83.6' cy='365.0' r='0.9' fill-opacity='0.86'/%3E%3Ccircle cx='146.4' cy='456.4' r='1.6' fill-opacity='0.92'/%3E%3Ccircle cx='254.4' cy='46.1' r='0.9' fill-opacity='0.61'/%3E%3Ccircle cx='142.7' cy='86.8' r='0.9' fill-opacity='0.82'/%3E%3Ccircle cx='349.5' cy='176.1' r='0.9' fill-opacity='0.96'/%3E%3Ccircle cx='519.2' cy='20.5' r='0.9' fill-opacity='0.87'/%3E%3Ccircle cx='343.4' cy='280.9' r='1.2' fill-opacity='0.50'/%3E%3Ccircle cx='265.7' cy='459.6' r='0.9' fill-opacity='0.88'/%3E%3Ccircle cx='108.4' cy='23.0' r='0.9' fill-opacity='0.96'/%3E%3Ccircle cx='13.5' cy='72.6' r='1.2' fill-opacity='0.63'/%3E%3Ccircle cx='291.9' cy='490.9' r='1.2' fill-opacity='0.57'/%3E%3Ccircle cx='340.5' cy='424.9' r='0.9' fill-opacity='0.51'/%3E%3Ccircle cx='224.9' cy='22.4' r='0.9' fill-opacity='0.67'/%3E%3Ccircle cx='221.4' cy='353.6' r='0.9' fill-opacity='0.93'/%3E%3Ccircle cx='398.6' cy='71.9' r='0.9' fill-opacity='0.86'/%3E%3Ccircle cx='80.0' cy='190.1' r='0.9' fill-opacity='0.51'/%3E%3Ccircle cx='208.2' cy='157.3' r='0.9' fill-opacity='0.55'/%3E%3Ccircle cx='20.4' cy='379.4' r='1.2' fill-opacity='0.61'/%3E%3Ccircle cx='96.1' cy='461.2' r='1.2' fill-opacity='0.52'/%3E%3Ccircle cx='62.1' cy='442.6' r='1.6' fill-opacity='0.82'/%3E%3Ccircle cx='445.8' cy='428.9' r='1.2' fill-opacity='0.83'/%3E%3Ccircle cx='104.7' cy='138.6' r='0.9' fill-opacity='0.97'/%3E%3Ccircle cx='307.5' cy='248.1' r='1.6' fill-opacity='0.68'/%3E%3Ccircle cx='401.0' cy='171.9' r='0.9' fill-opacity='0.90'/%3E%3Ccircle cx='423.5' cy='136.6' r='0.9' fill-opacity='0.47'/%3E%3Ccircle cx='493.3' cy='370.8' r='0.9' fill-opacity='0.70'/%3E%3Ccircle cx='191.1' cy='71.1' r='1.2' fill-opacity='0.65'/%3E%3Ccircle cx='267.0' cy='287.1' r='1.6' fill-opacity='0.67'/%3E%3Ccircle cx='240.5' cy='244.0' r='0.9' fill-opacity='0.76'/%3E%3Ccircle cx='146.7' cy='324.7' r='0.9' fill-opacity='0.73'/%3E%3Ccircle cx='465.4' cy='180.1' r='0.9' fill-opacity='0.93'/%3E%3Ccircle cx='144.8' cy='403.0' r='1.2' fill-opacity='0.52'/%3E%3Ccircle cx='170.3' cy='215.5' r='0.9' fill-opacity='0.67'/%3E%3Ccircle cx='5.0' cy='110.6' r='1.2' fill-opacity='0.86'/%3E%3Ccircle cx='291.9' cy='25.3' r='0.9' fill-opacity='0.65'/%3E%3Ccircle cx='507.8' cy='495.4' r='0.9' fill-opacity='0.86'/%3E%3Ccircle cx='126.8' cy='214.5' r='0.9' fill-opacity='0.67'/%3E%3Ccircle cx='133.2' cy='501.7' r='0.9' fill-opacity='0.59'/%3E%3Ccircle cx='464.1' cy='270.9' r='0.9' fill-opacity='0.54'/%3E%3Ccircle cx='191.6' cy='318.0' r='1.2' fill-opacity='0.74'/%3E%3Ccircle cx='175.7' cy='253.6' r='0.9' fill-opacity='0.70'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='347' height='347'%3E%3Ccircle cx='165.7' cy='333.7' r='1' fill-opacity='0.57'/%3E%3Ccircle cx='188.7' cy='175.2' r='1.4' fill-opacity='0.90'/%3E%3Ccircle cx='91.1' cy='226.9' r='1.4' fill-opacity='0.66'/%3E%3Ccircle cx='233.7' cy='201.4' r='1' fill-opacity='0.85'/%3E%3Ccircle cx='26.1' cy='295.6' r='1.4' fill-opacity='0.91'/%3E%3Ccircle cx='237.8' cy='145.8' r='1.4' fill-opacity='0.98'/%3E%3Ccircle cx='127.8' cy='296.6' r='1' fill-opacity='0.80'/%3E%3Ccircle cx='29.4' cy='257.5' r='1' fill-opacity='0.86'/%3E%3Ccircle cx='242.7' cy='272.4' r='1.4' fill-opacity='0.84'/%3E%3Ccircle cx='149.4' cy='148.5' r='1' fill-opacity='0.93'/%3E%3Ccircle cx='7.0' cy='103.7' r='1' fill-opacity='0.78'/%3E%3Ccircle cx='262.5' cy='189.5' r='1' fill-opacity='0.95'/%3E%3Ccircle cx='234.0' cy='4.8' r='1' fill-opacity='0.78'/%3E%3Ccircle cx='91.7' cy='9.0' r='1' fill-opacity='0.54'/%3E%3Ccircle cx='148.9' cy='104.2' r='1' fill-opacity='0.57'/%3E%3Ccircle cx='299.2' cy='262.9' r='1' fill-opacity='0.74'/%3E%3Ccircle cx='335.0' cy='14.4' r='1' fill-opacity='0.88'/%3E%3Ccircle cx='190.5' cy='300.8' r='1.4' fill-opacity='0.70'/%3E%3Ccircle cx='198.4' cy='113.2' r='1.9' fill-opacity='0.63'/%3E%3Ccircle cx='177.4' cy='267.2' r='1' fill-opacity='0.90'/%3E%3Ccircle cx='266.2' cy='85.8' r='1' fill-opacity='0.83'/%3E%3Ccircle cx='89.3' cy='181.9' r='1' fill-opacity='0.59'/%3E%3Ccircle cx='31.2' cy='90.7' r='1.9' fill-opacity='0.79'/%3E%3Ccircle cx='299.2' cy='50.8' r='1' fill-opacity='0.82'/%3E%3Ccircle cx='39.0' cy='117.8' r='1' fill-opacity='0.80'/%3E%3Ccircle cx='99.8' cy='82.1' r='1' fill-opacity='0.90'/%3E%3Ccircle cx='82.6' cy='280.2' r='1' fill-opacity='0.52'/%3E%3Ccircle cx='247.6' cy='60.9' r='1' fill-opacity='0.59'/%3E%3Ccircle cx='47.2' cy='143.9' r='1.4' fill-opacity='0.80'/%3E%3Ccircle cx='178.1' cy='149.8' r='1' fill-opacity='0.64'/%3E%3Ccircle cx='154.9' cy='35.9' r='1' fill-opacity='0.76'/%3E%3Ccircle cx='300.0' cy='138.3' r='1.4' fill-opacity='0.46'/%3E%3Ccircle cx='55.7' cy='249.9' r='1.4' fill-opacity='0.75'/%3E%3Ccircle cx='73.6' cy='331.6' r='1.4' fill-opacity='0.95'/%3E%3Ccircle cx='59.1' cy='293.0' r='1' fill-opacity='0.64'/%3E%3Ccircle cx='95.6' cy='41.2' r='1' fill-opacity='0.98'/%3E%3Ccircle cx='109.1' cy='126.2' r='1' fill-opacity='0.97'/%3E%3Ccircle cx='26.1' cy='160.6' r='1.4' fill-opacity='0.97'/%3E%3Ccircle cx='6.9' cy='54.7' r='1' fill-opacity='0.53'/%3E%3Ccircle cx='308.8' cy='308.0' r='1.4' fill-opacity='0.66'/%3E%3Ccircle cx='138.0' cy='67.0' r='1' fill-opacity='0.78'/%3E%3Ccircle cx='179.5' cy='56.0' r='1' fill-opacity='0.47'/%3E%3Ccircle cx='26.1' cy='193.7' r='1' fill-opacity='0.50'/%3E%3Ccircle cx='4.5' cy='131.6' r='1' fill-opacity='0.92'/%3E%3Ccircle cx='337.1' cy='158.6' r='1' fill-opacity='0.57'/%3E%3Ccircle cx='51.6' cy='46.7' r='1.4' fill-opacity='0.81'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='523' height='523'%3E%3Ccircle cx='204.4' cy='224.8' r='0.9' fill-opacity='0.80'/%3E%3Ccircle cx='65.7' cy='315.7' r='0.9' fill-opacity='0.88'/%3E%3Ccircle cx='16.3' cy='262.7' r='0.9' fill-opacity='0.72'/%3E%3Ccircle cx='36.6' cy='345.8' r='0.9' fill-opacity='0.72'/%3E%3Ccircle cx='342.9' cy='90.9' r='0.9' fill-opacity='0.61'/%3E%3Ccircle cx='260.6' cy='150.1' r='0.9' fill-opacity='0.64'/%3E%3Ccircle cx='311.5' cy='204.0' r='0.9' fill-opacity='0.80'/%3E%3Ccircle cx='186.8' cy='519.8' r='0.9' fill-opacity='0.75'/%3E%3Ccircle cx='403.2' cy='452.1' r='1.6' fill-opacity='0.58'/%3E%3Ccircle cx='55.0' cy='228.5' r='0.9' fill-opacity='0.82'/%3E%3Ccircle cx='268.3' cy='81.4' r='0.9' fill-opacity='0.69'/%3E%3Ccircle cx='343.0' cy='225.4' r='0.9' fill-opacity='0.71'/%3E%3Ccircle cx='64.4' cy='135.0' r='0.9' fill-opacity='0.90'/%3E%3Ccircle cx='83.6' cy='365.0' r='0.9' fill-opacity='0.86'/%3E%3Ccircle cx='146.4' cy='456.4' r='1.6' fill-opacity='0.92'/%3E%3Ccircle cx='254.4' cy='46.1' r='0.9' fill-opacity='0.61'/%3E%3Ccircle cx='142.7' cy='86.8' r='0.9' fill-opacity='0.82'/%3E%3Ccircle cx='349.5' cy='176.1' r='0.9' fill-opacity='0.96'/%3E%3Ccircle cx='519.2' cy='20.5' r='0.9' fill-opacity='0.87'/%3E%3Ccircle cx='343.4' cy='280.9' r='1.2' fill-opacity='0.50'/%3E%3Ccircle cx='265.7' cy='459.6' r='0.9' fill-opacity='0.88'/%3E%3Ccircle cx='108.4' cy='23.0' r='0.9' fill-opacity='0.96'/%3E%3Ccircle cx='13.5' cy='72.6' r='1.2' fill-opacity='0.63'/%3E%3Ccircle cx='291.9' cy='490.9' r='1.2' fill-opacity='0.57'/%3E%3Ccircle cx='340.5' cy='424.9' r='0.9' fill-opacity='0.51'/%3E%3Ccircle cx='224.9' cy='22.4' r='0.9' fill-opacity='0.67'/%3E%3Ccircle cx='221.4' cy='353.6' r='0.9' fill-opacity='0.93'/%3E%3Ccircle cx='398.6' cy='71.9' r='0.9' fill-opacity='0.86'/%3E%3Ccircle cx='80.0' cy='190.1' r='0.9' fill-opacity='0.51'/%3E%3Ccircle cx='208.2' cy='157.3' r='0.9' fill-opacity='0.55'/%3E%3Ccircle cx='20.4' cy='379.4' r='1.2' fill-opacity='0.61'/%3E%3Ccircle cx='96.1' cy='461.2' r='1.2' fill-opacity='0.52'/%3E%3Ccircle cx='62.1' cy='442.6' r='1.6' fill-opacity='0.82'/%3E%3Ccircle cx='445.8' cy='428.9' r='1.2' fill-opacity='0.83'/%3E%3Ccircle cx='104.7' cy='138.6' r='0.9' fill-opacity='0.97'/%3E%3Ccircle cx='307.5' cy='248.1' r='1.6' fill-opacity='0.68'/%3E%3Ccircle cx='401.0' cy='171.9' r='0.9' fill-opacity='0.90'/%3E%3Ccircle cx='423.5' cy='136.6' r='0.9' fill-opacity='0.47'/%3E%3Ccircle cx='493.3' cy='370.8' r='0.9' fill-opacity='0.70'/%3E%3Ccircle cx='191.1' cy='71.1' r='1.2' fill-opacity='0.65'/%3E%3Ccircle cx='267.0' cy='287.1' r='1.6' fill-opacity='0.67'/%3E%3Ccircle cx='240.5' cy='244.0' r='0.9' fill-opacity='0.76'/%3E%3Ccircle cx='146.7' cy='324.7' r='0.9' fill-opacity='0.73'/%3E%3Ccircle cx='465.4' cy='180.1' r='0.9' fill-opacity='0.93'/%3E%3Ccircle cx='144.8' cy='403.0' r='1.2' fill-opacity='0.52'/%3E%3Ccircle cx='170.3' cy='215.5' r='0.9' fill-opacity='0.67'/%3E%3Ccircle cx='5.0' cy='110.6' r='1.2' fill-opacity='0.86'/%3E%3Ccircle cx='291.9' cy='25.3' r='0.9' fill-opacity='0.65'/%3E%3Ccircle cx='507.8' cy='495.4' r='0.9' fill-opacity='0.86'/%3E%3Ccircle cx='126.8' cy='214.5' r='0.9' fill-opacity='0.67'/%3E%3Ccircle cx='133.2' cy='501.7' r='0.9' fill-opacity='0.59'/%3E%3Ccircle cx='464.1' cy='270.9' r='0.9' fill-opacity='0.54'/%3E%3Ccircle cx='191.6' cy='318.0' r='1.2' fill-opacity='0.74'/%3E%3Ccircle cx='175.7' cy='253.6' r='0.9' fill-opacity='0.70'/%3E%3C/svg%3E");
-  -webkit-mask-size: 347px 347px, 523px 523px;
-  mask-size: 347px 347px, 523px 523px;
-}
-
-/* Mouvement lent de la lumière et des halos */
-@keyframes fond-halos {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to   { transform: translate3d(2%, 3%, 0) scale(1.06); }
-}
-
-/* Moins d'animations demandées : le fond reste immobile */
-@media (prefers-reduced-motion: reduce) {
-  body::before {
-    animation: none !important;
-  }
 }
