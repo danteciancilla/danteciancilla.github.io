@@ -1090,9 +1090,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const champs = $$("input[name], textarea[name]", form).filter((c) => regles[c.name]);
 
-    // Vérification quand on quitte un champ, puis en direct s'il était en erreur
+    // Efface le message d'erreur d'un champ
+    function effacerErreur(champ) {
+      const zoneErreur = document.getElementById(champ.id + "-error");
+      champ.setAttribute("aria-invalid", "false");
+      if (zoneErreur) zoneErreur.textContent = "";
+    }
+
+    // Quand on quitte un champ : on le vérifie seulement s'il contient du texte.
+    // Un champ vide n'affiche pas d'erreur (on le signale seulement à l'envoi).
+    // Ensuite, vérification en direct si le champ était en erreur.
     champs.forEach((champ) => {
-      champ.addEventListener("blur", () => verifierChamp(champ));
+      champ.addEventListener("blur", () => {
+        if (champ.value.trim() === "") effacerErreur(champ);
+        else verifierChamp(champ);
+      });
       champ.addEventListener("input", () => {
         if (champ.getAttribute("aria-invalid") === "true") verifierChamp(champ);
       });
