@@ -25,7 +25,7 @@
    21. Mentions légales
    22. Vignettes : accroche, projets « À venir »
    24. Profil et compétences : agencement
-   25. Fond du site : lumière, halos et grain
+   25. Fond du site : lumière, taches de couleur et grain
    ===================================================================== */
 
 
@@ -590,16 +590,18 @@ button {
   padding: calc(var(--header-h) + clamp(40px, 7vw, 88px)) 0 clamp(32px, 4vw, 48px);
 }
 
-/* Décoration : grille de points qui s'estompe sur les bords */
+/* Décoration : grille de points, de la même force partout (centre et côtés),
+   qui s'efface seulement vers le bas de l'accueil */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
+  opacity: 0.6;           /* points plus discrets */
   background-image: radial-gradient(var(--dot) 1px, transparent 1px);
   background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 30%, transparent 78%);
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 30%, transparent 78%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  mask-image: linear-gradient(to bottom, #000 60%, transparent);
   pointer-events: none;
 }
 
@@ -2839,28 +2841,26 @@ button[disabled] {
 
 
 /* =====================================================================
-   25. FOND DU SITE : LUMIÈRE, HALOS ET GRAIN
+   25. FOND DU SITE : LUMIÈRE, TACHES DE COULEUR ET GRAIN
    Trois calques placés derrière tout le contenu de la page :
-   - body::before : une lumière en haut de la page et des halos de
-     couleur sur les côtés, semés tout le long de la page. Ils défilent
-     avec la page : on en découvre de nouveaux en descendant ;
+   - body::before : une lumière en haut de la page et des taches de
+     couleur floues, semées tout le long de la page. Elles défilent
+     avec la page : on en découvre de nouvelles en descendant ;
    - html::before : un léger grain, comme sur une photo argentique ;
    - body::after  : les bords de l'écran un peu assombris (vignette).
    Le grain et la vignette sont fixes (« position: fixed ») : ils
    restent en place quand on fait défiler.
    ===================================================================== */
 :root {
-  --lumiere: rgba(8, 145, 178, 0.22);    /* lumière du haut (cyan) */
-  --halo-1: rgba(59, 130, 246, 0.14);    /* halo à gauche (bleu) */
-  --halo-2: rgba(20, 184, 166, 0.14);    /* halo à droite (turquoise) */
+  --lumiere: rgba(99, 102, 241, 0.12);   /* lumière du haut (indigo, pas cyan : le texte est cyan) */
+  --taches: url("images/taches-clair.svg");  /* taches très légères : violet, rose, indigo, pêche */
   --vignette: rgba(31, 58, 95, 0.07);    /* bords assombris */
   --grain-opacite: 0.05;
 }
 
 [data-theme="dark"] {
   --lumiere: rgba(124, 58, 237, 0.36);   /* violet */
-  --halo-1: rgba(124, 58, 237, 0.20);    /* violet */
-  --halo-2: rgba(219, 39, 119, 0.15);    /* magenta */
+  --taches: url("images/taches-sombre.svg"); /* violet, magenta, bleu, indigo */
   --vignette: rgba(0, 0, 0, 0.45);
   --grain-opacite: 0.07;
 }
@@ -2877,17 +2877,19 @@ body::after {
   pointer-events: none;   /* ne gêne pas les clics */
 }
 
-/* Lumière du haut + halos de couleur, sur toute la hauteur de la page.
-   Chaque halo est dessiné dans une « tuile » répétée vers le bas (repeat-y).
-   Les deux tuiles n'ont pas la même hauteur (1400 px et 1900 px) :
-   les halos de gauche et de droite ne reviennent pas au même rythme. */
+/* Lumière du haut + taches de couleur, sur toute la hauteur de la page.
+   Les taches sont dans une image SVG (images/taches-clair.svg ou
+   taches-sombre.svg selon le thème) : 8 formes floues, toutes différentes
+   (taille, forme, couleur), qui alternent gauche / milieu / droite.
+   L'image fait 1440 x 3200 px et se répète vers le bas (repeat-y).
+   max(100%, 1200px) : sur téléphone, l'image garde une taille correcte
+   (on en voit le centre) au lieu de devenir minuscule. */
 body::before {
   position: absolute;
   inset: 0;               /* toute la page, pas seulement l'écran */
   background:
     radial-gradient(50vw 300px at 50% 90px, var(--lumiere), transparent 70%) no-repeat,
-    radial-gradient(520px 420px at 4% 50%, var(--halo-1), transparent 70%) 0 -200px / 100% 1400px repeat-y,
-    radial-gradient(520px 420px at 96% 50%, var(--halo-2), transparent 70%) 0 -250px / 100% 1900px repeat-y;
+    var(--taches) center top / max(100%, 1200px) auto repeat-y;
 }
 
 /* Vignette : les bords de l'écran légèrement plus sombres (fixe) */
